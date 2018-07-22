@@ -25,7 +25,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         int vista = view.getId();
         switch (vista) {
             case R.id.btnA: {
-                Toast.makeText(this, "hi", Toast.LENGTH_SHORT).show();
                 this.startActivity(new Intent(this, NavigationActivity.class));
                 break;
             }

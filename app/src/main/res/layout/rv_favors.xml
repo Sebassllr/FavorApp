@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="100dp">
+    <LinearLayout
+        android:weightSum="10"
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="99dp">
+        <TextView
+            android:id="@+id/tvProducto"
+            android:textColor="@color/black"
+            android:textSize="30sp"
+            android:text="Producto"
+            android:layout_weight="7"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="70dp"
+            android:layout_weight="3"
+            android:src="@color/colorPrimaryDark" />
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/black" />
+</LinearLayout>
