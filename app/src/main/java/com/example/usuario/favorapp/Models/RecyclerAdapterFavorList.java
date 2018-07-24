@@ -1,4 +1,4 @@
-package com.example.usuario.favorapp;
+package com.example.usuario.favorapp.Models;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -8,11 +8,12 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.usuario.favorapp.Clases.Favor;
+import com.example.usuario.favorapp.R;
 
 import java.util.ArrayList;
 
 
-public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
+public class RecyclerAdapterFavorList extends RecyclerView.Adapter<RecyclerAdapterFavorList.ViewHolder> {
 
     private ArrayList<Favor> mDataset;
 
@@ -32,17 +33,17 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public MyAdapter(Context context ,ArrayList<Favor> myDataset) {
+    public RecyclerAdapterFavorList(Context context ,ArrayList<Favor> myDataset) {
         this.mDataset = myDataset;
         this.mContext = context;
     }
 
     // Create new views (invoked by the layout manager)
     @Override
-    public MyAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RecyclerAdapterFavorList.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         // create a new view
-        View v = LayoutInflater.from(mContext).inflate(R.layout.rv_favors,parent,false);
-        return new MyAdapter.ViewHolder(v);
+        View v = LayoutInflater.from(mContext).inflate(R.layout.rv_favors_list,parent,false);
+        return new RecyclerAdapterFavorList.ViewHolder(v);
     }
 
     // Replace the contents of a view (invoked by the layout manager)

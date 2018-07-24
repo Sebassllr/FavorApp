@@ -1,4 +1,4 @@
-package com.example.usuario.favorapp;
+package com.example.usuario.favorapp.Fragments;
 
 import android.content.Context;
 import android.net.Uri;
@@ -7,6 +7,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.example.usuario.favorapp.R;
 
 public class PerfilFragment extends Fragment {
 
