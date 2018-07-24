@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.usuario.favorapp.Clases.Favor;
+
 import java.util.ArrayList;
 
 
@@ -30,8 +32,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public MyAdapter(ArrayList<Favor> myDataset) {
-        mDataset = myDataset;
+    public MyAdapter(Context context ,ArrayList<Favor> myDataset) {
+        this.mDataset = myDataset;
+        this.mContext = context;
     }
 
     // Create new views (invoked by the layout manager)
