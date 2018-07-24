@@ -3,50 +3,44 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="100dp"
-    android:orientation="vertical"
-    android:layout_margin="@dimen/fab_margin">
+    android:orientation="vertical">
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.2"
-        android:orientation="horizontal"   >
+        android:weightSum="2"
+        android:orientation="horizontal"
+        android:layout_margin="@dimen/fab_margin">
         <LinearLayout
+            android:orientation="vertical"
+            android:weightSum="10"
+            android:layout_weight="1"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.3">
+            android:background="@drawable/ic_launcher_background"
+            android:layout_height="match_parent">
+            <TextView
+                android:textSize="15dp"
+                android:text="text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent">
             <ImageView
-                android:id="@+id/imVPerfilC"
-                android:layout_width="match_parent"
+                android:id="@+id/imPair"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:src="@drawable/ic_menu_gallery"/>
+                android:layout_weight="1"
+                android:src="@drawable/ic_menu_gallery" />
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.7"
-            android:orientation="vertical">
-            <TextView
-                android:id="@+id/tvNameC"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:textColor="@color/colorAccent"
-                android:textSize="19sp"
-                android:text="Nombre:"
-                android:background="@color/colorAccent"
-                android:layout_weight="0.3"/>
-            <TextView
-                android:id="@+id/tvComent"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:textColor="@color/colorAccent"
-                android:textSize="15sp"
-                android:background="@color/black"
-                android:text="comentario..."
-                android:layout_weight="0.7"/>
-        </LinearLayout>
     </LinearLayout>
-
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/black" />
 </LinearLayout>

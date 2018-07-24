@@ -14,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
 
+import com.example.usuario.favorapp.Fragments.ListaFavoresFragment;
 import com.example.usuario.favorapp.Fragments.PerfilFragment;
 
 public class NavigationActivity extends AppCompatActivity
@@ -100,6 +101,7 @@ public class NavigationActivity extends AppCompatActivity
                 break;
             }
             case R.id.nav_manage:{
+                fragment = new ListaFavoresFragment();
                 break;
             }
             case R.id.nav_gallery:{

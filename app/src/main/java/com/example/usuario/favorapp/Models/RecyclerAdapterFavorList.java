@@ -1,6 +1,7 @@
 package com.example.usuario.favorapp.Models;
 
 import android.content.Context;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +20,7 @@ public class RecyclerAdapterFavorList extends RecyclerView.Adapter<RecyclerAdapt
 
     private Context mContext;
 
+    private FragmentTransaction transaction;
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
     // you provide access to all the views for a data item in a view holder
@@ -33,9 +35,10 @@ public class RecyclerAdapterFavorList extends RecyclerView.Adapter<RecyclerAdapt
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public RecyclerAdapterFavorList(Context context ,ArrayList<Favor> myDataset) {
+    public RecyclerAdapterFavorList(Context context ,ArrayList<Favor> myDataset, FragmentTransaction transaction) {
         this.mDataset = myDataset;
         this.mContext = context;
+        this.transaction = transaction;
     }
 
     // Create new views (invoked by the layout manager)
