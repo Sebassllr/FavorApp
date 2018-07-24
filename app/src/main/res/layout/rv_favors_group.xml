@@ -2,51 +2,30 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="100dp"
     android:orientation="vertical"
-    android:layout_margin="@dimen/fab_margin">
-
-
+    android:layout_height="100dp">
     <LinearLayout
+        android:weightSum="10"
+        android:padding="10dp"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.2"
-        android:orientation="horizontal"   >
-        <LinearLayout
+        android:layout_height="99dp">
+        <TextView
+            android:id="@+id/tvProducto"
+            android:textColor="@color/black"
+            android:textSize="30sp"
+            android:text="Producto"
+            android:layout_weight="7"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.3">
-            <ImageView
-                android:id="@+id/imVPerfilC"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:src="@drawable/ic_menu_gallery"/>
-        </LinearLayout>
+            android:layout_height="wrap_content" />
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.7"
-            android:orientation="vertical">
-            <TextView
-                android:id="@+id/tvNameC"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:textColor="@color/colorAccent"
-                android:textSize="19sp"
-                android:text="Nombre:"
-                android:background="@color/colorAccent"
-                android:layout_weight="0.3"/>
-            <TextView
-                android:id="@+id/tvComent"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:textColor="@color/colorAccent"
-                android:textSize="15sp"
-                android:background="@color/black"
-                android:text="comentario..."
-                android:layout_weight="0.7"/>
-        </LinearLayout>
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="70dp"
+            android:layout_weight="3"
+            android:src="@color/colorPrimaryDark" />
     </LinearLayout>
-
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/black" />
 </LinearLayout>

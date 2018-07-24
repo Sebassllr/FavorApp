@@ -1,12 +1,9 @@
 package com.example.usuario.favorapp;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -16,6 +13,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
+
+import com.example.usuario.favorapp.Fragments.ListaFavoresFragment;
+import com.example.usuario.favorapp.Fragments.PerfilFragment;
 
 public class NavigationActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -96,16 +96,19 @@ public class NavigationActivity extends AppCompatActivity
         int id = item.getItemId();
 
         switch (id){
-            case R.id.nav_camera:{
+            case R.id.nav_profile:{
                 fragment = new PerfilFragment();
                 break;
             }
+            case R.id.nav_home:{
+                fragment = new ListaFavoresFragment();
+                break;
+            }
             case R.id.nav_manage:{
+
                 break;
             }
-            case R.id.nav_gallery:{
-                break;
-            }
+
         }
 
         if(fragment != null) {

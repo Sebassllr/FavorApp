@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="10dp"
+    style="@style/AppThemea"
     tools:context="com.example.usuario.favorapp.MainActivity">
 
     <TextView
