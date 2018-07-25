@@ -9,9 +9,15 @@
     <string name="action_settings">Settings</string>
     <string name="email">E-mail</string>
     <string name="password">Contraseña</string>
+    <string name="ConfirmPassword">Confirmar contraseña</string>
     <string name="name">Nombre:</string>
+    <string name="description">Description:</string>
     <string name="Favors">Favores:</string>
     <string name="profile">Perfil</string>
+    <string name="register">¡Regístrate!</string>
+    <string name="Ingresar">Ingresar</string>
+    <string name="AddFavor">Agregar favor</string>
+
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

@@ -10,26 +10,76 @@
 
     <TextView
         android:textColor="@color/black"
+        android:labelFor="@id/tvMail"
         android:text="@string/email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+
     <EditText
         android:id="@+id/tvMail"
         android:layout_width="match_parent"
-        android:layout_height="50dp" />
+        android:layout_height="50dp"
+        android:includeFontPadding="false"
+        android:inputType="textEmailAddress" />
     <TextView
+        android:labelFor="@id/tvPassword"
         android:textColor="@color/black"
         android:text="@string/password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+
     <EditText
         android:id="@+id/tvPassword"
         android:layout_width="match_parent"
-        android:layout_height="50dp" />
+        android:layout_height="50dp"
+        android:inputType="textPassword" />
+    <LinearLayout
+        android:id="@+id/llConfirmPassword"
+        android:visibility="gone"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="80dp">
+        <TextView
+            android:labelFor="@id/tvConfirmPassword"
+            android:textColor="@color/black"
+            android:text="@string/ConfirmPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:id="@+id/tvConfirmPassword"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:inputType="textPassword" />
+    </LinearLayout>
+    <LinearLayout
+        android:weightSum="2"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:layout_margin="10dp"
+            android:background="#C1C1C1"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:text="@string/Ingresar"
+            android:id="@+id/btnA"/>
+        <Button
+            android:layout_margin="10dp"
+            android:background="#C1C1C1"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:text="@string/register"
+            android:id="@+id/btnRegister"/>
+    </LinearLayout>
     <Button
+        android:visibility="gone"
+        android:layout_margin="10dp"
+        android:background="#C1C1C1"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:text="Button"
-        android:id="@+id/btnA"/>
-
+        android:text="@string/register"
+        android:id="@+id/btnRegistrar"/>
 </LinearLayout>

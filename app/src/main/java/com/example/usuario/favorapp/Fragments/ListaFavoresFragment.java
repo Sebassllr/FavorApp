@@ -23,7 +23,7 @@ public class ListaFavoresFragment extends Fragment {
     private LinearLayoutManager mLinearLayoutManager;
 
     private ArrayList<Favor> mDataTest = new ArrayList();
-    private View view ;
+    private View view;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
