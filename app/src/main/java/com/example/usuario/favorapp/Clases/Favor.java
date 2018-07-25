@@ -7,7 +7,7 @@ public class Favor {
     /////////////////
 
     private String name;
-    private String image;
+    private int image;
     private String pts;
     private String fecha;
     private String ubicacion;
@@ -18,7 +18,7 @@ public class Favor {
 
     public Favor(){}
 
-    public Favor(String name, String image, String pts, String fecha, String ubicacion) {
+    public Favor(String name, int image, String pts, String fecha, String ubicacion) {
         this.name = name;
         this.image = image;
         this.pts = pts;
@@ -40,11 +40,11 @@ public class Favor {
         this.name = name;
     }
 
-    public String getImage() {
+    public int getImage() {
         return image;
     }
 
-    public void setImage(String image) {
+    public void setImage(int image) {
         this.image = image;
     }
 

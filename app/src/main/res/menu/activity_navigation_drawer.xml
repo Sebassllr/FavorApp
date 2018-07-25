@@ -12,14 +12,15 @@
             android:id="@+id/nav_home"
             android:icon="@mipmap/ic_home"
             android:title="Inicio" />
-        <!--<item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" />-->
         <item
             android:id="@+id/nav_manage"
             android:icon="@drawable/ic_menu_manage"
             android:title="Configuracion" />
+
+        <item
+            android:id="@+id/nav_logout"
+            android:icon="@mipmap/ic_shut_down"
+            android:title="Cerrar Sesión" />
     </group>
 
     <!--<item android:title="Communicate">

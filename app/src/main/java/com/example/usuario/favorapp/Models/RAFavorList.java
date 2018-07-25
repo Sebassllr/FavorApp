@@ -13,7 +13,7 @@ import com.example.usuario.favorapp.R;
 import java.util.ArrayList;
 
 
-public class RecyclerAdapterFavorList extends RecyclerView.Adapter<RecyclerAdapterFavorList.ViewHolder> {
+public class RAFavorList extends RecyclerView.Adapter<RAFavorList.ViewHolder> {
 
     private ArrayList<Favor> mDataset;
 
@@ -33,17 +33,17 @@ public class RecyclerAdapterFavorList extends RecyclerView.Adapter<RecyclerAdapt
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public RecyclerAdapterFavorList(Context context , ArrayList<Favor> myDataset) {
+    public RAFavorList(Context context , ArrayList<Favor> myDataset) {
         this.mDataset = myDataset;
         this.mContext = context;
     }
 
     // Create new views (invoked by the layout manager)
     @Override
-    public RecyclerAdapterFavorList.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RAFavorList.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         // create a new view
         View v = LayoutInflater.from(mContext).inflate(R.layout.rv_favors_list,parent,false);
-        return new RecyclerAdapterFavorList.ViewHolder(v);
+        return new RAFavorList.ViewHolder(v);
     }
 
     // Replace the contents of a view (invoked by the layout manager)

@@ -5,7 +5,9 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="10dp"
+    android:layout_marginTop="150dp"
     style="@style/AppThemea"
+
     tools:context="com.example.usuario.favorapp.MainActivity">
 
     <TextView
@@ -29,7 +31,7 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:text="Button"
+        android:text="Loguearse"
         android:id="@+id/btnA"/>
 
 </LinearLayout>

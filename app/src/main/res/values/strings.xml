@@ -12,7 +12,8 @@
     <string name="name">Nombre:</string>
     <string name="Favors">Favores:</string>
     <string name="profile">Perfil</string>
-
+    <string name="action_edit">Editar</string>
+    <string name="action_delete">Eliminar</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

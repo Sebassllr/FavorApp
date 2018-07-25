@@ -4,12 +4,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="10dp"
+    android:orientation="vertical"
     tools:context=".Fragments.PerfilFragment">
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
         <TextView
             android:textColor="@color/black"
             android:textAlignment="center"
@@ -17,12 +18,14 @@
             android:text="@string/profile"
             android:textSize="30sp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="0dp"
+            android:layout_weight="0.1"/>
         <LinearLayout
             android:weightSum="10"
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="0dp"
+            android:layout_weight="0.1">
             <TextView
                 android:layout_weight="4"
                 android:textColor="@color/colorPrimaryDark"
@@ -44,9 +47,10 @@
             android:weightSum="10"
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="0dp"
+            android:layout_weight="0.8">
             <TextView
-                android:layout_weight="4"
+                android:layout_weight="1"
                 android:textColor="@color/colorPrimaryDark"
                 android:text="@string/Favors"
                 android:layout_width="match_parent"
@@ -54,12 +58,27 @@
             <TextView
                 android:layout_marginLeft="10dp"
                 android:textColor="@color/black"
-                android:layout_weight="6"
+                android:layout_weight="1"
                 android:textSize="30sp"
                 android:text="@string/Favors"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/tvFavores"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="8">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_favors_group"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clipToPadding="false"
+                    android:scrollbars="vertical"/>
+
+            </LinearLayout>
+
+
         </LinearLayout>
     </LinearLayout>
 </FrameLayout>
