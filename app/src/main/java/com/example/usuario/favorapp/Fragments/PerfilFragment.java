@@ -10,7 +10,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
+import com.example.usuario.favorapp.MainActivity;
+import com.example.usuario.favorapp.NavigationActivity;
 import com.example.usuario.favorapp.Clases.Favor;
 import com.example.usuario.favorapp.Models.RAFavorGroup;
 import com.example.usuario.favorapp.Models.RAFavorProfileG;
@@ -20,7 +23,10 @@ import com.example.usuario.favorapp.Util.Util;
 
 import java.util.ArrayList;
 
-public class PerfilFragment extends Fragment {
+public class PerfilFragment extends Fragment implements View.OnClickListener{
+
+
+    Button btnAddFavor;
 
     private RecyclerView mRecyclerDates;
     private RAFavorProfileG mFavors;
@@ -34,7 +40,19 @@ public class PerfilFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        view = inflater.inflate(R.layout.fragment_perfil, container, false);
         // Inflate the layout for this fragment
+        initializer();
+        return view;
+    }
+
+    /**
+     * Inicializa los compontentes de la vista
+     */
+    private void initializer(){
+        btnAddFavor = view.findViewById(R.id.btnAddFavor);
+        btnAddFavor.setOnClickListener(this);
         view = inflater.inflate(R.layout.fragment_perfil, container, false);
         setRecycler();
         return view;
@@ -65,7 +83,18 @@ public class PerfilFragment extends Fragment {
 
         mFavors = new RAFavorProfileG(view.getContext(),mDataTest);
         mRecyclerDates.setAdapter(mFavors);
-
     }
 
+    @Override
+    public void onClick(View v) {
+        Integer id = v.getId();
+        switch (id){
+            case R.id.btnAddFavor:{
+                NavigationActivity activity = (NavigationActivity) view.getContext();
+                AgregarFavorFragment fragmentClassroomCode = new AgregarFavorFragment();
+                activity.getSupportFragmentManager().beginTransaction().replace(R.id.FrFragment, fragmentClassroomCode).addToBackStack(null).commit();
+                break;
+            }
+        }
+    }
 }
