@@ -5,7 +5,9 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="10dp"
+    android:layout_marginTop="150dp"
     style="@style/AppThemea"
+
     tools:context="com.example.usuario.favorapp.MainActivity">
 
     <TextView
@@ -82,4 +84,5 @@
         android:layout_height="50dp"
         android:text="@string/register"
         android:id="@+id/btnRegistrar"/>
+
 </LinearLayout>

@@ -108,6 +108,10 @@ public class NavigationActivity extends AppCompatActivity
 
                 break;
             }
+            case R.id.nav_logout:{
+
+                break;
+            }
 
         }
 
