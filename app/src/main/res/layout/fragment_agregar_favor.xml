@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <TextView
+            android:fontFamily="@font/the_breakdown"
             android:textAlignment="center"
             android:textSize="35sp"
             android:textColor="@color/colorAccent"
@@ -29,6 +30,12 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:inputType="textPassword" />
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:entries="@array/favores"
+            android:prompt="@string/Favor">
+        </Spinner>
         <TextView
             android:labelFor="@id/tvDescription"
             android:textColor="@color/black"

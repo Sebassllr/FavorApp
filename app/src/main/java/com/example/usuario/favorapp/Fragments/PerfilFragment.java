@@ -25,8 +25,7 @@ import java.util.ArrayList;
 
 public class PerfilFragment extends Fragment implements View.OnClickListener{
 
-
-    Button btnAddFavor;
+    private Button btnAddFavor;
 
     private RecyclerView mRecyclerDates;
     private RAFavorProfileG mFavors;
@@ -35,7 +34,6 @@ public class PerfilFragment extends Fragment implements View.OnClickListener{
     private ArrayList<Favor> mDataTest = new ArrayList();
     private View view ;
     private Resources r;
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -53,11 +51,12 @@ public class PerfilFragment extends Fragment implements View.OnClickListener{
     private void initializer(){
         btnAddFavor = view.findViewById(R.id.btnAddFavor);
         btnAddFavor.setOnClickListener(this);
-        view = inflater.inflate(R.layout.fragment_perfil, container, false);
         setRecycler();
-        return view;
     }
 
+    /**
+     * Setea el recyclerView
+     */
     private void setRecycler(){
         r = getResources();
         int[] covers = new int[]{
@@ -71,10 +70,8 @@ public class PerfilFragment extends Fragment implements View.OnClickListener{
         mDataTest.add(f1);
         mDataTest.add(f);
 
-
         mRecyclerDates = view.findViewById(R.id.rv_favors_group) ;
         mRecyclerDates.setHasFixedSize(true);
-
 
         mLinearLayoutManager =  new GridLayoutManager(view.getContext(), 2);
         mRecyclerDates.setLayoutManager(mLinearLayoutManager);
