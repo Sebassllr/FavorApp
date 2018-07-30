@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:padding="10dp"
     style="@style/AppThemea"
-    tools:context="com.example.usuario.favorapp.MainActivity">
+    tools:context="com.example.usuario.favorapp.ActivityLogin">
 
     <TextView
         android:layout_marginTop="25dp"
@@ -32,6 +32,24 @@
         android:layout_height="50dp"
         android:includeFontPadding="false"
         android:inputType="textEmailAddress" />
+    <LinearLayout
+        android:id="@+id/llCompleteName"
+        android:visibility="gone"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="80dp">
+        <TextView
+            android:labelFor="@id/tvConfirmPassword"
+            android:textColor="@color/black"
+            android:text="Nombre completo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:id="@+id/tvCompleteName"
+            android:layout_width="match_parent"
+            android:layout_height="50dp" />
+    </LinearLayout>
     <TextView
         android:labelFor="@id/tvPassword"
         android:textColor="@color/black"

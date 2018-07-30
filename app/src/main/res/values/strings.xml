@@ -11,7 +11,8 @@
     <string name="password">Contraseña</string>
     <string name="ConfirmPassword">Confirmar contraseña</string>
     <string name="name">Nombre:</string>
-    <string name="description">Description:</string>
+    <string name="points">Puntos:</string>
+    <string name="description">Descripción:</string>
     <string name="Favors">Favores:</string>
     <string name="profile">Perfil</string>
     <string name="register">¡Regístrate!</string>

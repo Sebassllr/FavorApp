@@ -12,10 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.example.usuario.favorapp.MainActivity;
 import com.example.usuario.favorapp.NavigationActivity;
 import com.example.usuario.favorapp.Clases.Favor;
-import com.example.usuario.favorapp.Models.RAFavorGroup;
 import com.example.usuario.favorapp.Models.RAFavorProfileG;
 import com.example.usuario.favorapp.R;
 import com.example.usuario.favorapp.Util.GridSpacingItemDecoration;
@@ -58,17 +56,18 @@ public class PerfilFragment extends Fragment implements View.OnClickListener{
      * Setea el recyclerView
      */
     private void setRecycler(){
-        r = getResources();
-        int[] covers = new int[]{
-                R.drawable.art1,
-                R.drawable.art2};
+      r = getResources();
+      /*    int[] covers = new int[]{
+                  R.drawable.art1,
+                  R.drawable.art2
+                };
 
-        Favor f = new Favor("Reloj",covers[0],"PTS: 250","22/12/2018","papa");
-        Favor f1 = new Favor("Reloj super lindo ",covers[1],"PTS: 500","22/12/2018","papa");
+        Favor f = new Favor("Reloj",covers[0],"PTS: 250","22/12/2018","Medellín", "yo");
+        Favor f1 = new Favor("Reloj super lindo ",covers[1],"PTS: 500","22/12/2018","Medellín", "yo");
         mDataTest.add(f);
         mDataTest.add(f1);
         mDataTest.add(f1);
-        mDataTest.add(f);
+        mDataTest.add(f);*/
 
         mRecyclerDates = view.findViewById(R.id.rv_favors_group) ;
         mRecyclerDates.setHasFixedSize(true);

@@ -1,5 +1,6 @@
 package com.example.usuario.favorapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -14,11 +15,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
 
+import com.example.usuario.favorapp.Clases.Transacciones;
 import com.example.usuario.favorapp.Fragments.ListaFavoresFragment;
 import com.example.usuario.favorapp.Fragments.PerfilFragment;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class NavigationActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+        private Transacciones tr = new Transacciones();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +30,6 @@ public class NavigationActivity extends AppCompatActivity
         setContentView(R.layout.activity_navigation);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -45,6 +48,7 @@ public class NavigationActivity extends AppCompatActivity
         Fragment fragment = new PerfilFragment();
         transaction.replace(R.id.FrFragment, fragment);
         transaction.commit();
+        tr.inicializatedFireBase(this);
     }
 
     @Override
@@ -109,7 +113,7 @@ public class NavigationActivity extends AppCompatActivity
                 break;
             }
             case R.id.nav_logout:{
-
+                signout();
                 break;
             }
 
@@ -122,5 +126,10 @@ public class NavigationActivity extends AppCompatActivity
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+    private void signout(){
+        tr.firebaseAuth.signOut();
+        finish();
+        startActivity(new Intent(NavigationActivity.this, ActivityLogin.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK));
     }
 }

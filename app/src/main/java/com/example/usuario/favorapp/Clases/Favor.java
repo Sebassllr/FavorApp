@@ -7,30 +7,41 @@ public class Favor {
     /////////////////
 
     private String name;
-    private int image;
+    private String idOwner;
+    private String image;
     private String pts;
     private String fecha;
-    private String ubicacion;
-
+    private String descripcion;
+    private boolean disponibilidad;
     //////////////////
     //Constructor
     /////////////////
 
     public Favor(){}
 
-    public Favor(String name, int image, String pts, String fecha, String ubicacion) {
+    public Favor(String name, String image, String pts, String fecha,String descripcion, boolean disponibilidad, String idOwner) {
         this.name = name;
         this.image = image;
         this.pts = pts;
         this.fecha = fecha;
-        this.ubicacion = ubicacion;
+        this.descripcion = descripcion;
+        this.disponibilidad = disponibilidad;
+        this.idOwner = idOwner;
     }
+
 
     //////////////////////////
     //Getter ans Setter
     ///////////////////////////
 
 
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
 
     public String getName() {
         return name;
@@ -40,13 +51,7 @@ public class Favor {
         this.name = name;
     }
 
-    public int getImage() {
-        return image;
-    }
 
-    public void setImage(int image) {
-        this.image = image;
-    }
 
     public String getPts() {
         return pts;
@@ -64,11 +69,27 @@ public class Favor {
         this.fecha = fecha;
     }
 
-    public String getUbicacion() {
-        return ubicacion;
+    public String getDescripcion() {
+        return descripcion;
     }
 
-    public void setUbicacion(String ubicacion) {
-        this.ubicacion = ubicacion;
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public boolean isDisponibilidad() {
+        return disponibilidad;
+    }
+
+    public void setDisponibilidad(boolean disponibilidad) {
+        this.disponibilidad = disponibilidad;
+    }
+
+    public String getIdOwner() {
+        return idOwner;
+    }
+
+    public void setIdOwner(String idOwner) {
+        this.idOwner = idOwner;
     }
 }

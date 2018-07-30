@@ -43,17 +43,18 @@ public class ListaFavoresFragment extends Fragment {
 
 
     private void setRecycler(){
-        r = getResources();
-        int[] covers = new int[]{
-                R.drawable.art1,
-                R.drawable.art2};
+       r = getResources();
+        /* int[] covers = new int[]{
+             //   R.drawable.art1,
+               // R.drawable.art2
+        };
 
-        Favor f = new Favor("Reloj",covers[0],"PTS: 250","22/12/2018","papa");
-        Favor f1 = new Favor("Reloj super lindo ",covers[1],"PTS: 500","22/12/2018","papa");
+        Favor f = new Favor("Reloj",covers[0],"PTS: 250","22/12/2018","Medellín", "yo");
+        Favor f1 = new Favor("Reloj super lindo ",covers[1],"PTS: 500","22/12/2018","Medellín", "yo");
         mDataTest.add(f);
         mDataTest.add(f1);
         mDataTest.add(f1);
-        mDataTest.add(f);
+        mDataTest.add(f);*/
 
 
         mRecyclerDates = view.findViewById(R.id.rv_favors_group) ;
