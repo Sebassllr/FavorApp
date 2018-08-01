@@ -10,11 +10,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.usuario.favorapp.Clases.Favor;
+import com.example.usuario.favorapp.Fragments.AgregarFavorFragment;
+import com.example.usuario.favorapp.NavigationActivity;
 import com.example.usuario.favorapp.R;
 
 import java.util.ArrayList;
@@ -25,6 +28,10 @@ public class RAFavorProfileG extends RecyclerView.Adapter<RAFavorProfileG.ViewHo
 
     private Context mContext;
 
+    public static Boolean isEdit;
+
+    public static Favor favorProfile;
+
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
     // you provide access to all the views for a data item in a view holder
@@ -32,16 +39,17 @@ public class RAFavorProfileG extends RecyclerView.Adapter<RAFavorProfileG.ViewHo
         TextView textView,title, count,date;
         ImageView thumbnail, overflow;
         View thisView;
+        LinearLayout linearLayout;
         // each data item is just a string in this case
         public ViewHolder(View v) {
             super(v);
-            //textView = v.findViewById(R.id.tvProducto);
             title = (TextView) v.findViewById(R.id.title);
             count = (TextView) v.findViewById(R.id.count);
             date = (TextView) v.findViewById(R.id.date);
             thumbnail = (ImageView) v.findViewById(R.id.thumbnail);
             thisView = v;
             overflow = (ImageView) v.findViewById(R.id.overflow);
+            linearLayout = v.findViewById(R.id.llAllCard);
         }
     }
 
@@ -60,7 +68,7 @@ public class RAFavorProfileG extends RecyclerView.Adapter<RAFavorProfileG.ViewHo
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final RAFavorProfileG.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final RAFavorProfileG.ViewHolder holder, final int position) {
         // holder.textView.setText(mDataset.get(position).getName());
         final Favor favor = mDataset.get(position);
         holder.title.setText(favor.getName());
@@ -72,10 +80,11 @@ public class RAFavorProfileG extends RecyclerView.Adapter<RAFavorProfileG.ViewHo
         holder.overflow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                   showPopupMenu(holder.overflow);
+                favorProfile = mDataset.get(position);
+                isEdit = Boolean.TRUE;
+                showPopupMenu(holder.overflow);
             }
         });
-
     }
     /**
      * Showing popup menu when tapping on 3 dots
@@ -92,7 +101,7 @@ public class RAFavorProfileG extends RecyclerView.Adapter<RAFavorProfileG.ViewHo
     /**
      * Click listener for popup menu items
      */
-    class MyMenuItemClickListener implements PopupMenu.OnMenuItemClickListener {
+    class MyMenuItemClickListener implements PopupMenu.OnMenuItemClickListener{
 
         public MyMenuItemClickListener() {
         }
@@ -101,6 +110,9 @@ public class RAFavorProfileG extends RecyclerView.Adapter<RAFavorProfileG.ViewHo
         public boolean onMenuItemClick(MenuItem menuItem) {
             switch (menuItem.getItemId()) {
                 case R.id.action_edit:
+                    NavigationActivity activity = (NavigationActivity) mContext;
+                    AgregarFavorFragment fragmentVisualizarFavores = new AgregarFavorFragment();
+                    activity.getSupportFragmentManager().beginTransaction().replace(R.id.FrFragment, fragmentVisualizarFavores).addToBackStack(null).commit();
                     Toast.makeText(mContext, "Editar", Toast.LENGTH_SHORT).show();
                     return true;
                 case R.id.action_delete:

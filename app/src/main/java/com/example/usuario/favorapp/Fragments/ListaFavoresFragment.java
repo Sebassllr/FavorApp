@@ -13,12 +13,17 @@ import android.view.ViewGroup;
 
 
 import com.example.usuario.favorapp.Clases.Favor;
+import com.example.usuario.favorapp.Clases.FirebaseDAO;
 import com.example.usuario.favorapp.Models.RAFavorGroup;
 import com.example.usuario.favorapp.R;
 import com.example.usuario.favorapp.Util.GridSpacingItemDecoration;
 import com.example.usuario.favorapp.Util.Util;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ListaFavoresFragment extends Fragment {
 
@@ -26,50 +31,54 @@ public class ListaFavoresFragment extends Fragment {
     private RAFavorGroup mFavors;
     private LinearLayoutManager mLinearLayoutManager;
 
-    private ArrayList<Favor> mDataTest = new ArrayList();
+    public static List<Favor> mDataTest = new ArrayList();
     private View view;
     private Resources r;
-
+    private FirebaseDAO firebaseDAO;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_lista_favores, container, false);
-        setRecycler();
+        init();
+        getNodes(new Favor());
         return view;
 
     }
 
+    private void init(){
+        firebaseDAO = new FirebaseDAO();
+    }
 
     private void setRecycler(){
-       r = getResources();
-        /* int[] covers = new int[]{
-             //   R.drawable.art1,
-               // R.drawable.art2
-        };
-
-        Favor f = new Favor("Reloj",covers[0],"PTS: 250","22/12/2018","Medellín", "yo");
-        Favor f1 = new Favor("Reloj super lindo ",covers[1],"PTS: 500","22/12/2018","Medellín", "yo");
-        mDataTest.add(f);
-        mDataTest.add(f1);
-        mDataTest.add(f1);
-        mDataTest.add(f);*/
-
-
+        r = getResources();
         mRecyclerDates = view.findViewById(R.id.rv_favors_group) ;
         mRecyclerDates.setHasFixedSize(true);
-
 
         mLinearLayoutManager =  new GridLayoutManager(view.getContext(), 2);
         mRecyclerDates.setLayoutManager(mLinearLayoutManager);
         mRecyclerDates.addItemDecoration(new GridSpacingItemDecoration(2, Util.dpToPx(10,r), true));
         mRecyclerDates.setItemAnimator(new DefaultItemAnimator());
-
-        mFavors = new RAFavorGroup(view.getContext(),mDataTest);
+        mFavors = new RAFavorGroup(view.getContext(), mDataTest);
         mRecyclerDates.setAdapter(mFavors);
-
     }
 
-
+    public void getNodes(final Favor favor){
+        mDataTest = new ArrayList<>();
+        firebaseDAO.getDatabaseReference().child(favor.getFirebaseNodeName())
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                            Favor object = snapshot.getValue(favor.getClass());
+                            mDataTest.add(object);
+                        }
+                        setRecycler();
+                    }
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                    }
+                });
+    }
 }

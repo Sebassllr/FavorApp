@@ -29,6 +29,9 @@ import java.util.Calendar;
 import java.util.Date;
 
 import static android.app.Activity.RESULT_OK;
+import static com.example.usuario.favorapp.Models.RAFavorGroup.favorCommit;
+import static com.example.usuario.favorapp.Models.RAFavorProfileG.favorProfile;
+import static com.example.usuario.favorapp.Models.RAFavorProfileG.isEdit;
 
 public class AgregarFavorFragment extends Fragment implements View.OnClickListener {
 
@@ -41,7 +44,8 @@ public class AgregarFavorFragment extends Fragment implements View.OnClickListen
     private Uri descargarFoto = null;
     private Calendar cal = Calendar.getInstance();
 
-    protected static final int GALLERY_INTENT= 1;
+    private static final int GALLERY_INTENT= 1;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -54,6 +58,7 @@ public class AgregarFavorFragment extends Fragment implements View.OnClickListen
 
     public void init(){
 
+
         tvNameFavor = view.findViewById(R.id.tvNameFavor);
         tvUrlImage = view.findViewById(R.id.tvUrlImage);
         tvDescription = view.findViewById(R.id.tvDescription);
@@ -63,6 +68,29 @@ public class AgregarFavorFragment extends Fragment implements View.OnClickListen
         btnAddFavor.setOnClickListener(this);
         btnAddImage.setOnClickListener(this);
 
+        if(favorCommit != null || favorProfile != null){
+            Favor favor;
+            if(favorCommit != null){
+                favor = favorCommit;
+            }else{
+                favor = favorProfile;
+            }
+            if(isEdit != null){
+                isEdit = null;
+            }else{
+                tvNameFavor.setEnabled(Boolean.FALSE);
+                tvDescription.setEnabled(Boolean.FALSE);
+                tvUrlImage.setVisibility(View.GONE);
+                sp_dynamic.setEnabled(Boolean.FALSE);
+                btnAddImage.setVisibility(View.GONE);
+            }
+
+            tvNameFavor.setText(favor.getName());
+            tvDescription.setText(favor.getDescripcion());
+            sp_dynamic.setSelection(Integer.parseInt(favor.getPts())/100);
+            favorCommit = null;
+            favorProfile = null;
+        }
     }
 
 
@@ -71,9 +99,8 @@ public class AgregarFavorFragment extends Fragment implements View.OnClickListen
         int vista = view.getId();
         switch (vista){
             case R.id.btnAddFavor: {
-               // String idEntregable = tr.databaseReference.push().getKey();
-                // tr.registrarFavor("name",2,"20","28/07/2018","Medellín","Juan",idEntregable);
                 createFavor();
+
                 break;
             }
 
@@ -97,7 +124,6 @@ public class AgregarFavorFragment extends Fragment implements View.OnClickListen
             String descripcion = Util.getTxt(tvDescription);
             tr.registrarFavor(name,foto,puntos,fecha,descripcion,true,tr.firebaseAuth.getCurrentUser().getUid(),idEntregable);
         }
-
     }
 
     @Override
@@ -111,8 +137,6 @@ public class AgregarFavorFragment extends Fragment implements View.OnClickListen
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                     descargarFoto = taskSnapshot.getDownloadUrl();
                     tvUrlImage.setText(uri+"");
-                    //setImageInImV(uri);
-                    // putImg(obj);
                 }
             });
         }

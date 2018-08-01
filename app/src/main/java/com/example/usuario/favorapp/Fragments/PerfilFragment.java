@@ -12,12 +12,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.example.usuario.favorapp.Clases.FirebaseDAO;
 import com.example.usuario.favorapp.NavigationActivity;
 import com.example.usuario.favorapp.Clases.Favor;
 import com.example.usuario.favorapp.Models.RAFavorProfileG;
 import com.example.usuario.favorapp.R;
 import com.example.usuario.favorapp.Util.GridSpacingItemDecoration;
 import com.example.usuario.favorapp.Util.Util;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -32,6 +36,8 @@ public class PerfilFragment extends Fragment implements View.OnClickListener{
     private ArrayList<Favor> mDataTest = new ArrayList();
     private View view ;
     private Resources r;
+
+    private FirebaseDAO firebaseDAO;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -49,25 +55,16 @@ public class PerfilFragment extends Fragment implements View.OnClickListener{
     private void initializer(){
         btnAddFavor = view.findViewById(R.id.btnAddFavor);
         btnAddFavor.setOnClickListener(this);
-        setRecycler();
+        firebaseDAO = new FirebaseDAO();
+        getNodes(new Favor());
+
     }
 
     /**
      * Setea el recyclerView
      */
     private void setRecycler(){
-      r = getResources();
-      /*    int[] covers = new int[]{
-                  R.drawable.art1,
-                  R.drawable.art2
-                };
-
-        Favor f = new Favor("Reloj",covers[0],"PTS: 250","22/12/2018","Medellín", "yo");
-        Favor f1 = new Favor("Reloj super lindo ",covers[1],"PTS: 500","22/12/2018","Medellín", "yo");
-        mDataTest.add(f);
-        mDataTest.add(f1);
-        mDataTest.add(f1);
-        mDataTest.add(f);*/
+        r = getResources();
 
         mRecyclerDates = view.findViewById(R.id.rv_favors_group) ;
         mRecyclerDates.setHasFixedSize(true);
@@ -79,6 +76,24 @@ public class PerfilFragment extends Fragment implements View.OnClickListener{
 
         mFavors = new RAFavorProfileG(view.getContext(),mDataTest);
         mRecyclerDates.setAdapter(mFavors);
+    }
+
+    public void getNodes(final Favor favor){
+        mDataTest = new ArrayList<>();
+        firebaseDAO.getDatabaseReference().child(favor.getFirebaseNodeName())
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                            Favor object = snapshot.getValue(favor.getClass());
+                            mDataTest.add(object);
+                        }
+                        setRecycler();
+                    }
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                    }
+                });
     }
 
     @Override

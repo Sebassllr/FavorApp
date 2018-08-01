@@ -1,6 +1,7 @@
 package com.example.usuario.favorapp.Models;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,16 +12,24 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.usuario.favorapp.Clases.Favor;
+import com.example.usuario.favorapp.Fragments.AgregarFavorFragment;
+import com.example.usuario.favorapp.NavigationActivity;
 import com.example.usuario.favorapp.R;
 
-import java.util.ArrayList;
+import java.util.List;
 
 
 public class RAFavorGroup extends RecyclerView.Adapter<RAFavorGroup.ViewHolder> {
 
-    private ArrayList<Favor> mDataset;
+    private List<Favor> mDataset;
 
     private Context mContext;
+
+    public static Favor favorCommit;
+    /**
+     * Argumentos a ser enviados al otro fragment
+     */
+    private Bundle args = new Bundle();
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -29,21 +38,20 @@ public class RAFavorGroup extends RecyclerView.Adapter<RAFavorGroup.ViewHolder> 
         TextView textView,title, count,date;
         ImageView thumbnail, overflow;
         View thisView;
+
         // each data item is just a string in this case
         public ViewHolder(View v) {
             super(v);
-            //textView = v.findViewById(R.id.tvProducto);
             title = (TextView) v.findViewById(R.id.title);
             count = (TextView) v.findViewById(R.id.count);
             date = (TextView) v.findViewById(R.id.date);
             thumbnail = (ImageView) v.findViewById(R.id.thumbnail);
             thisView = v;
-            //overflow = (ImageView) v.findViewById(R.id.overflow);
         }
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public RAFavorGroup(Context context , ArrayList<Favor> myDataset) {
+    public RAFavorGroup(Context context , List<Favor> myDataset) {
         this.mDataset = myDataset;
         this.mContext = context;
     }
@@ -58,7 +66,7 @@ public class RAFavorGroup extends RecyclerView.Adapter<RAFavorGroup.ViewHolder> 
 
     // Replace the contents of a view (invoked by the layout manager)
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, final int position) {
        // holder.textView.setText(mDataset.get(position).getName());
         final Favor favor = mDataset.get(position);
         holder.title.setText(favor.getName());
@@ -78,6 +86,11 @@ public class RAFavorGroup extends RecyclerView.Adapter<RAFavorGroup.ViewHolder> 
             @Override
             public void onClick(View view) {
                 //    showPopupMenu(holder.overflow);
+                favorCommit = mDataset.get(position);
+                NavigationActivity activity = (NavigationActivity)view.getContext();
+                AgregarFavorFragment fragmentVisualizarFavores = new AgregarFavorFragment();
+                activity.getSupportFragmentManager().beginTransaction().replace(R.id.FrFragment, fragmentVisualizarFavores).addToBackStack(null).commit();
+
                 Toast.makeText(mContext, favor.getName(), Toast.LENGTH_SHORT).show();
             }
         });

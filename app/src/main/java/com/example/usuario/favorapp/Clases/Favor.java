@@ -1,6 +1,6 @@
 package com.example.usuario.favorapp.Clases;
 
-public class Favor {
+public class Favor implements FirebaseItems{
 
     //////////////////
     //Variables
@@ -51,8 +51,6 @@ public class Favor {
         this.name = name;
     }
 
-
-
     public String getPts() {
         return pts;
     }
@@ -91,5 +89,10 @@ public class Favor {
 
     public void setIdOwner(String idOwner) {
         this.idOwner = idOwner;
+    }
+
+    @Override
+    public String getFirebaseNodeName() {
+        return "Favores";
     }
 }
