@@ -140,15 +140,9 @@ public class ActivityLogin extends AppCompatActivity implements View.OnClickList
     }
 
     private void registro(){
-        if(true){
-            String name = Util.getTxt(tvCompleteName);
-            String mail = Util.getTxt(tvMail);
-            String pass = Util.getTxt(tvPassword);
-            tr.registrarUser(mail,pass,this,name,"100");
-        }
+        String name = Util.getTxt(tvCompleteName);
+        String mail = Util.getTxt(tvMail);
+        String pass = Util.getTxt(tvPassword);
+        tr.registrarUser(mail,pass,this,name,"100");
     }
-
-
-
-
 }

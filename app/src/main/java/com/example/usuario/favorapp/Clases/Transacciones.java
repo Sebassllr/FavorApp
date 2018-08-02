@@ -61,9 +61,6 @@ public class Transacciones {
         insertar("Favores", key, favor).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
-                //Agregar aula a estudiantes
-                 //   databaseReference.child("Favores").push().setValue(key);
-
             }
         });
     }
@@ -86,8 +83,6 @@ public class Transacciones {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 user = firebaseAuth.getCurrentUser();
-//                int tipo_usuario = Integer.parseInt(dataSnapshot.child(user.getUid()).child("tipoUser").getValue().toString());
-               // TIPO_USUARIO = tipo_usuario;
                 context.startActivity(new Intent(context, NavigationActivity.class));
             }
 
@@ -96,7 +91,6 @@ public class Transacciones {
 
             }
         });
-
     }
 
     /**
@@ -143,8 +137,6 @@ public class Transacciones {
 
                         }
                     });
-                }else{
-
                 }
             }
         });
