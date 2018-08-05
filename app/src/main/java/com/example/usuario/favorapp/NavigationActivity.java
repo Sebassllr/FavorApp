@@ -76,9 +76,9 @@ public class NavigationActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+      /*  if (id == R.id.action_settings) {
             return true;
-        }
+        }*/
 
         return super.onOptionsItemSelected(item);
     }
@@ -108,10 +108,10 @@ public class NavigationActivity extends AppCompatActivity
                 fragment = new ListaFavoresFragment();
                 break;
             }
-            case R.id.nav_manage:{
+           /* case R.id.nav_manage:{
 
                 break;
-            }
+            }*/
             case R.id.nav_logout:{
                 signout();
                 break;

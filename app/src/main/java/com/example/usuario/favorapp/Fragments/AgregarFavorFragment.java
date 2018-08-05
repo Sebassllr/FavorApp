@@ -57,8 +57,6 @@ public class AgregarFavorFragment extends Fragment implements View.OnClickListen
     }
 
     public void init(){
-
-
         tvNameFavor = view.findViewById(R.id.tvNameFavor);
         tvUrlImage = view.findViewById(R.id.tvUrlImage);
         tvDescription = view.findViewById(R.id.tvDescription);

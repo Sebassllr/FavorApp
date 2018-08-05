@@ -2,6 +2,8 @@ package com.example.usuario.favorapp.Models;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +15,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.usuario.favorapp.Clases.Favor;
 import com.example.usuario.favorapp.Fragments.AgregarFavorFragment;
+import com.example.usuario.favorapp.Fragments.DescripFragment;
 import com.example.usuario.favorapp.NavigationActivity;
 import com.example.usuario.favorapp.R;
 
@@ -79,19 +82,28 @@ public class RAFavorGroup extends RecyclerView.Adapter<RAFavorGroup.ViewHolder> 
             @Override
             public void onClick(View view) {
             //    showPopupMenu(holder.overflow);
-                Toast.makeText(mContext, favor.getName(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(mContext, favor.getName(), Toast.LENGTH_SHORT).show();
             }
         });
         holder.thumbnail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //    showPopupMenu(holder.overflow);
-                favorCommit = mDataset.get(position);
-                NavigationActivity activity = (NavigationActivity)view.getContext();
-                AgregarFavorFragment fragmentVisualizarFavores = new AgregarFavorFragment();
-                activity.getSupportFragmentManager().beginTransaction().replace(R.id.FrFragment, fragmentVisualizarFavores).addToBackStack(null).commit();
 
-                Toast.makeText(mContext, favor.getName(), Toast.LENGTH_SHORT).show();
+                //args = getArguments();
+
+                //FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                //transaction.replace(R.id.content_frame, fragment);
+                //transaction.commit();
+                favorCommit = mDataset.get(position);
+                Favor f = favorCommit;
+                NavigationActivity activity = (NavigationActivity)view.getContext();
+                DescripFragment fragmentV= new DescripFragment();
+                args.putSerializable("fav", f);
+                fragmentV.setArguments(args);
+                activity.getSupportFragmentManager().beginTransaction().replace(R.id.FrFragment, fragmentV).addToBackStack(null).commit();
+
+               // Toast.makeText(mContext, favor.getName(), Toast.LENGTH_SHORT).show();
             }
         });
     }

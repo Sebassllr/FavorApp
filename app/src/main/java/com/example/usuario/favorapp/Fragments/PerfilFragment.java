@@ -11,14 +11,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.usuario.favorapp.Clases.FirebaseDAO;
+import com.example.usuario.favorapp.Clases.Usuario;
 import com.example.usuario.favorapp.NavigationActivity;
 import com.example.usuario.favorapp.Clases.Favor;
 import com.example.usuario.favorapp.Models.RAFavorProfileG;
 import com.example.usuario.favorapp.R;
 import com.example.usuario.favorapp.Util.GridSpacingItemDecoration;
 import com.example.usuario.favorapp.Util.Util;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
@@ -38,7 +42,7 @@ public class PerfilFragment extends Fragment implements View.OnClickListener{
     private Resources r;
 
     private FirebaseDAO firebaseDAO;
-
+    private TextView tvName;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -53,11 +57,12 @@ public class PerfilFragment extends Fragment implements View.OnClickListener{
      * Inicializa los compontentes de la vista
      */
     private void initializer(){
+        tvName = view.findViewById(R.id.tvName);
         btnAddFavor = view.findViewById(R.id.btnAddFavor);
         btnAddFavor.setOnClickListener(this);
         firebaseDAO = new FirebaseDAO();
         getNodes(new Favor());
-
+        getNodes(new Usuario());
     }
 
     /**
@@ -84,9 +89,36 @@ public class PerfilFragment extends Fragment implements View.OnClickListener{
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
+                        FirebaseUser user = firebaseDAO.getFirebaseUser();
                         for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                             Favor object = snapshot.getValue(favor.getClass());
-                            mDataTest.add(object);
+
+                            if(object.getIdOwner().equals(user.getUid())){
+                                mDataTest.add(object);
+                            }
+
+                        }
+                        setRecycler();
+                    }
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                    }
+                });
+    }
+
+    public void getNodes(final Usuario us){
+        mDataTest = new ArrayList<>();
+        firebaseDAO.getDatabaseReference().child(us.getFirebaseNodeName())
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        FirebaseUser user = firebaseDAO.getFirebaseUser();
+                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                            Usuario object = snapshot.getValue(us.getClass());
+                            if(object.getId().equals(user.getUid())){
+                                tvName.setText(object.getNombre());
+                            }
+
                         }
                         setRecycler();
                     }

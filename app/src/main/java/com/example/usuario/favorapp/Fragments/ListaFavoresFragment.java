@@ -72,6 +72,7 @@ public class ListaFavoresFragment extends Fragment {
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                             Favor object = snapshot.getValue(favor.getClass());
+
                             mDataTest.add(object);
                         }
                         setRecycler();

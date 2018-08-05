@@ -55,8 +55,14 @@ public class Transacciones {
         return databaseReference.child(childDatabaseR).child(key).setValue(object);
     }
 
+
+    public Task<Void> updateEstado(String idFav, String idNodo, boolean valor){
+        return databaseReference.child("Favores").child(idFav).child(idNodo).setValue(valor);
+    }
+
+
     public void registrarFavor(String name, String image, String pts, String fecha, String descripcion,boolean disponibilidad, String idOwner, final String key){
-        Favor favor = new Favor(name,image,pts,fecha,descripcion,disponibilidad,idOwner);
+        Favor favor = new Favor(key,name,image,pts,fecha,descripcion,disponibilidad,idOwner);
 
         insertar("Favores", key, favor).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override

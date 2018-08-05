@@ -1,11 +1,13 @@
 package com.example.usuario.favorapp.Clases;
 
-public class Usuario {
+public class Usuario implements FirebaseItems{
 
     private String nombre;
     private String id;
     private String puntos;
     private String mail;
+
+    public Usuario (){}
 
     public Usuario(String nombre, String id, String puntos, String mail) {
         this.nombre = nombre;
@@ -44,5 +46,10 @@ public class Usuario {
 
     public void setPuntos(String puntos) {
         this.puntos = puntos;
+    }
+
+    @Override
+    public String getFirebaseNodeName() {
+        return "Users";
     }
 }
