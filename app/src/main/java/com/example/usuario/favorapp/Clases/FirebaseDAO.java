@@ -16,7 +16,7 @@ import static com.example.usuario.favorapp.ActivityLogin.calledAlready;
 public class FirebaseDAO {
 
     private DatabaseReference databaseReference;
-    private FirebaseAuth firebaseAuth;
+    public FirebaseAuth firebaseAuth;
     private FirebaseDatabase firebaseDatabase;
     private FirebaseUser firebaseUser;
     private StorageReference mStorage;

@@ -71,6 +71,17 @@ public class Transacciones {
         });
     }
 
+    public void pedirFavor( String idSolicitante, String fecha, String idFavor, String idOwner,String mailSolic,String nameSolic, String ptsReto,String nameReto,final String key){
+
+        //Solicitud solicitud = new Solicitud(key,idSolicitante,idFavor,idOwner,fecha,0);
+        Solicitud solicitud = new Solicitud(key, idSolicitante,idFavor, idOwner,mailSolic, nameSolic, ptsReto,nameReto, fecha ,0);
+        insertar("Solicitudes", key, solicitud).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+            }
+        });
+    }
+
     public void inicializatedFireBase(Context context){
 
         firebaseAuth = FirebaseAuth.getInstance();
@@ -147,6 +158,7 @@ public class Transacciones {
             }
         });
     }
+
 
 
 }

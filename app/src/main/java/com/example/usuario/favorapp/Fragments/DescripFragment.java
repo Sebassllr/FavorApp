@@ -13,8 +13,18 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.usuario.favorapp.Clases.Favor;
+import com.example.usuario.favorapp.Clases.FirebaseDAO;
 import com.example.usuario.favorapp.Clases.Transacciones;
+import com.example.usuario.favorapp.Clases.Usuario;
 import com.example.usuario.favorapp.R;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
 
 public class DescripFragment extends Fragment implements View.OnClickListener {
 
@@ -24,12 +34,17 @@ public class DescripFragment extends Fragment implements View.OnClickListener {
     private TextView tvNameFav,tvDescription;
     private Button btnPayFav;
     private Favor favor;
+    private String name;
+    private Calendar cal = Calendar.getInstance();
     private Transacciones tr = new Transacciones();
+    private FirebaseDAO firebaseDAO;
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_descripcion, container, false);
-
+        firebaseDAO = new FirebaseDAO();
+        getNodes(new Usuario());
         init();
         return view;
 
@@ -56,9 +71,37 @@ public class DescripFragment extends Fragment implements View.OnClickListener {
         int vista = view.getId();
         switch (vista) {
             case R.id.btnPayFav: {
-                tr.updateEstado(favor.getId(),"disponibilidad",favor.isDisponibilidad() ? false:true);
+                String idEntregable = tr.databaseReference.push().getKey();
+                FirebaseUser user = tr.firebaseAuth.getCurrentUser();
+                String fecha = new SimpleDateFormat("yyyy/MM/dd").format(cal.getTime());
+                String mail = user.getEmail();
+                String nameFavor = favor.getName();
+                String ptsReto = favor.getPts();
+                tr.pedirFavor(user.getUid(),fecha,favor.getId(),favor.getIdOwner(),mail,name,ptsReto,nameFavor,idEntregable);
+                tr.updateEstado(favor.getId(),"disponibilidad",false);
                 break;
             }
         }
+    }
+
+    public void getNodes(final Usuario us){
+        firebaseDAO.getDatabaseReference().child(us.getFirebaseNodeName())
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        FirebaseUser user = firebaseDAO.getFirebaseUser();
+                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                            Usuario object = snapshot.getValue(us.getClass());
+                            if(object.getId().equals(user.getUid())){
+                                name = object.getNombre();
+                            }
+
+                        }
+
+                    }
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                    }
+                });
     }
 }

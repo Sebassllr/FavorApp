@@ -19,6 +19,7 @@ import com.example.usuario.favorapp.NavigationActivity;
 import com.example.usuario.favorapp.R;
 import com.example.usuario.favorapp.Util.GridSpacingItemDecoration;
 import com.example.usuario.favorapp.Util.Util;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
@@ -70,6 +71,7 @@ public class ListaFavoresFragment extends Fragment {
 
     public void getNodes(final Favor favor){
         mDataTest = new ArrayList<>();
+        final FirebaseUser usa = firebaseDAO.firebaseAuth.getCurrentUser();
         firebaseDAO.getDatabaseReference().child(favor.getFirebaseNodeName())
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
@@ -77,7 +79,7 @@ public class ListaFavoresFragment extends Fragment {
                         for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                             Favor object = snapshot.getValue(favor.getClass());
 
-                            if(object.isDisponibilidad()){
+                            if(object.isDisponibilidad() && !object.getIdOwner().equals(usa.getUid())){
                                 mDataTest.add(object);
                             }
                         }
