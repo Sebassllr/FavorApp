@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import com.example.usuario.favorapp.Clases.Favor;
 import com.example.usuario.favorapp.Clases.FirebaseDAO;
 import com.example.usuario.favorapp.Models.RAFavorGroup;
+import com.example.usuario.favorapp.NavigationActivity;
 import com.example.usuario.favorapp.R;
 import com.example.usuario.favorapp.Util.GridSpacingItemDecoration;
 import com.example.usuario.favorapp.Util.Util;
@@ -41,6 +42,7 @@ public class ListaFavoresFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_lista_favores, container, false);
+        NavigationActivity.toolbar.setTitle("Inicio");
         init();
         getNodes(new Favor());
         return view;
@@ -73,7 +75,9 @@ public class ListaFavoresFragment extends Fragment {
                         for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                             Favor object = snapshot.getValue(favor.getClass());
 
-                            mDataTest.add(object);
+                            if(object.isDisponibilidad()){
+                                mDataTest.add(object);
+                            }
                         }
                         setRecycler();
                     }

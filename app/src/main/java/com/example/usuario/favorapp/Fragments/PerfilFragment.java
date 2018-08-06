@@ -49,6 +49,7 @@ public class PerfilFragment extends Fragment implements View.OnClickListener{
 
         view = inflater.inflate(R.layout.fragment_perfil, container, false);
         // Inflate the layout for this fragment
+        NavigationActivity.toolbar.setTitle("Perfil");
         initializer();
         return view;
     }
