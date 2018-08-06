@@ -42,9 +42,11 @@ public class ListaFavoresFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_lista_favores, container, false);
+
         NavigationActivity.toolbar.setTitle("Inicio");
         init();
         getNodes(new Favor());
+
         return view;
 
     }

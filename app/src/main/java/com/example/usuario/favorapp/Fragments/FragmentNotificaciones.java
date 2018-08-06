@@ -57,9 +57,9 @@ public class FragmentNotificaciones extends Fragment {
         mRecyclerDates = view.findViewById(R.id.rv_notificaciones) ;
         mRecyclerDates.setHasFixedSize(true);
 
-        mLinearLayoutManager =  new GridLayoutManager(view.getContext(), 2);
+        mLinearLayoutManager =  new GridLayoutManager(view.getContext(), 1);
         mRecyclerDates.setLayoutManager(mLinearLayoutManager);
-        mRecyclerDates.addItemDecoration(new GridSpacingItemDecoration(2, Util.dpToPx(10,r), true));
+        mRecyclerDates.addItemDecoration(new GridSpacingItemDecoration(1, Util.dpToPx(10,r), true));
         mRecyclerDates.setItemAnimator(new DefaultItemAnimator());
 
         mNotificaciones = new RANotificaciones(view.getContext(),mDataFavors,mDataUsers);
