@@ -1,0 +1,30 @@
+Updating 21c4b18..655514a
+Fast-forward
+ app/build.gradle                                   |  2 +-
+ .../example/usuario/favorapp/ActivityLogin.java    | 14 ++---
+ .../com/example/usuario/favorapp/Clases/Favor.java | 52 +++++++++++++--
+ .../usuario/favorapp/Clases/FirebaseDAO.java       | 67 ++++++++++++++++++++
+ .../usuario/favorapp/Clases/FirebaseItems.java     |  7 +++
+ .../example/usuario/favorapp/Clases/Listable.java  | 18 ++++++
+ .../usuario/favorapp/Clases/NodoFirebase.java      | 30 +++++++++
+ .../usuario/favorapp/Clases/Transacciones.java     | 16 +++--
+ .../example/usuario/favorapp/Clases/Usuario.java   |  9 ++-
+ .../favorapp/Fragments/AgregarFavorFragment.java   | 36 ++++++++---
+ .../favorapp/Fragments/DescripFragment.java        | 63 +++++++++++++++++++
+ .../favorapp/Fragments/ListaFavoresFragment.java   | 54 +++++++++-------
+ .../usuario/favorapp/Fragments/PerfilFragment.java | 73 ++++++++++++++++++----
+ .../usuario/favorapp/Models/RAFavorGroup.java      | 41 +++++++++---
+ .../usuario/favorapp/Models/RAFavorProfileG.java   | 22 +++++--
+ .../usuario/favorapp/NavigationActivity.java       |  8 +--
+ app/src/main/res/layout/fragment_descripcion.xml   | 38 +++++++++++
+ app/src/main/res/layout/fragment_perfil.xml        | 10 +--
+ app/src/main/res/layout/rv_favor_card.xml          | 15 +----
+ .../main/res/menu/activity_navigation_drawer.xml   |  4 +-
+ app/src/main/res/menu/navigation.xml               |  4 +-
+ 21 files changed, 473 insertions(+), 110 deletions(-)
+ create mode 100644 app/src/main/java/com/example/usuario/favorapp/Clases/FirebaseDAO.java
+ create mode 100644 app/src/main/java/com/example/usuario/favorapp/Clases/FirebaseItems.java
+ create mode 100644 app/src/main/java/com/example/usuario/favorapp/Clases/Listable.java
+ create mode 100644 app/src/main/java/com/example/usuario/favorapp/Clases/NodoFirebase.java
+ create mode 100644 app/src/main/java/com/example/usuario/favorapp/Fragments/DescripFragment.java
+ create mode 100644 app/src/main/res/layout/fragment_descripcion.xml

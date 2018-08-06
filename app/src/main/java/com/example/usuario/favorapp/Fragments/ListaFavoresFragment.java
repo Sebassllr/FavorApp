@@ -79,7 +79,7 @@ public class ListaFavoresFragment extends Fragment {
                         for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                             Favor object = snapshot.getValue(favor.getClass());
 
-                            if(object.isDisponibilidad() && !object.getIdOwner().equals(usa.getUid())){
+                            if(object.getDisponibilidad()==0 && !object.getIdOwner().equals(usa.getUid())){
                                 mDataTest.add(object);
                             }
                         }

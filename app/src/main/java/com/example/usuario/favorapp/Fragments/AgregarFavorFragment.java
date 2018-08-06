@@ -130,7 +130,7 @@ public class AgregarFavorFragment extends Fragment implements View.OnClickListen
             String fecha = new SimpleDateFormat("yyyy/MM/dd").format(cal.getTime());
             String idEntregable = tr.databaseReference.push().getKey();
             String descripcion = Util.getTxt(tvDescription);
-            tr.registrarFavor(name,foto,puntos,fecha,descripcion,true,tr.firebaseAuth.getCurrentUser().getUid(),idEntregable);
+            tr.registrarFavor(name,foto,puntos,fecha,descripcion,0,tr.firebaseAuth.getCurrentUser().getUid(),idEntregable);
         }
     }
 

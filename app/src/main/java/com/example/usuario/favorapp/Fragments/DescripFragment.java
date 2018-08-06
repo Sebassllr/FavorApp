@@ -78,7 +78,7 @@ public class DescripFragment extends Fragment implements View.OnClickListener {
                 String nameFavor = favor.getName();
                 String ptsReto = favor.getPts();
                 tr.pedirFavor(user.getUid(),fecha,favor.getId(),favor.getIdOwner(),mail,name,ptsReto,nameFavor,idEntregable);
-                tr.updateEstado(favor.getId(),"disponibilidad",false);
+                tr.updateEstado(favor.getId(),"disponibilidad",1);
                 break;
             }
         }
