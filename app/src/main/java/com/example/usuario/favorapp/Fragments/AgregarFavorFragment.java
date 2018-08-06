@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.usuario.favorapp.Clases.Favor;
@@ -36,13 +37,14 @@ import static com.example.usuario.favorapp.Models.RAFavorProfileG.isEdit;
 public class AgregarFavorFragment extends Fragment implements View.OnClickListener {
 
     private View view;
-    private EditText tvNameFavor,tvPoints,tvUrlImage,tvDescription;
+    private EditText tvNameFavor, tvUrlImage, tvDescription;
     private Spinner sp_dynamic;
     private Button btnAddFavor, btnAddImage;
     private Transacciones tr = new Transacciones();
     private FirebaseAuth mAuth;
     private Uri descargarFoto = null;
     private Calendar cal = Calendar.getInstance();
+    private Boolean isEditing = Boolean.FALSE;
 
     private static final int GALLERY_INTENT= 1;
 
@@ -74,7 +76,10 @@ public class AgregarFavorFragment extends Fragment implements View.OnClickListen
                 favor = favorProfile;
             }
             if(isEdit != null){
+                isEditing = isEdit;
                 isEdit = null;
+                btnAddFavor.setText("Editar favor");
+                ((TextView)view.findViewById(R.id.titleEdit)).setText("Editar favor");
             }else{
                 tvNameFavor.setEnabled(Boolean.FALSE);
                 tvDescription.setEnabled(Boolean.FALSE);
@@ -86,6 +91,7 @@ public class AgregarFavorFragment extends Fragment implements View.OnClickListen
             tvNameFavor.setText(favor.getName());
             tvDescription.setText(favor.getDescripcion());
             sp_dynamic.setSelection(Integer.parseInt(favor.getPts())/100);
+
             favorCommit = null;
             favorProfile = null;
         }
@@ -97,8 +103,13 @@ public class AgregarFavorFragment extends Fragment implements View.OnClickListen
         int vista = view.getId();
         switch (vista){
             case R.id.btnAddFavor: {
-                createFavor();
-
+                if(isEditing){
+                    //Acá va el método para editar, la variable "favor" contiene le favor actual,
+                    //que se está editando
+                    Toast.makeText(view.getContext(), "Estoy editando", Toast.LENGTH_SHORT).show();
+                }else{
+                    createFavor();
+                }
                 break;
             }
 
@@ -106,7 +117,6 @@ public class AgregarFavorFragment extends Fragment implements View.OnClickListen
                 Intent intentGallery = new Intent(Intent.ACTION_PICK);
                 intentGallery.setType("image/*");
                 startActivityForResult(intentGallery,GALLERY_INTENT);
-
                 break;
             }
         }
