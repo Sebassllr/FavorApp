@@ -93,7 +93,7 @@ public class PerfilFragment extends Fragment implements View.OnClickListener{
                         for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                             Favor object = snapshot.getValue(favor.getClass());
 
-                            if(object.getIdOwner().equals(user.getUid())){
+                            if(object != null && object.getIdOwner().equals(user.getUid())){
                                 mDataTest.add(object);
                             }
 

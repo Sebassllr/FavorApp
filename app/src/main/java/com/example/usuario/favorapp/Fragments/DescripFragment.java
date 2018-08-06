@@ -55,7 +55,7 @@ public class DescripFragment extends Fragment implements View.OnClickListener {
         int vista = view.getId();
         switch (vista) {
             case R.id.btnPayFav: {
-                tr.updateEstado(favor.getId(),"disponibilidad",favor.isDisponibilidad() ? false:true);
+                tr.updateEstado(favor.getId(),"disponibilidad" , favor.isDisponibilidad());
                 break;
             }
         }
