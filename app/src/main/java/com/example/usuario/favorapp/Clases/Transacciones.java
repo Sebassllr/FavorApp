@@ -62,6 +62,7 @@ public class Transacciones {
     }
 
 
+<<<<<<< HEAD
 
     public Task<Void> updateFavor(String idFav, Favor favor){
         Log.e("ERR", idFav);
@@ -69,6 +70,8 @@ public class Transacciones {
     }
 
 
+=======
+>>>>>>> 0ea0cb5cb6281b1b8df5f353a569e09687cecb24
     public void registrarFavor(String name, String image, String pts, String fecha, String descripcion, int disponibilidad, String idOwner, final String key){
         Favor favor = new Favor(key,name,image,pts,fecha,descripcion,disponibilidad,idOwner);
 

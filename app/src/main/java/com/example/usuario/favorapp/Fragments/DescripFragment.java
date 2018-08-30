@@ -72,8 +72,11 @@ public class DescripFragment extends Fragment implements View.OnClickListener {
         int vista = view.getId();
         switch (vista) {
             case R.id.btnPayFav: {
+<<<<<<< HEAD
                 pedirFavor();
                 changeF();
+=======
+>>>>>>> 0ea0cb5cb6281b1b8df5f353a569e09687cecb24
                 break;
             }
         }
