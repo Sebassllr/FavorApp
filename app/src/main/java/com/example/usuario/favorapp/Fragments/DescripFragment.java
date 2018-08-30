@@ -72,19 +72,9 @@ public class DescripFragment extends Fragment implements View.OnClickListener {
         int vista = view.getId();
         switch (vista) {
             case R.id.btnPayFav: {
-
                 pedirFavor();
                 changeF();
-
-                String idEntregable = tr.databaseReference.push().getKey();
-                FirebaseUser user = tr.firebaseAuth.getCurrentUser();
-                String fecha = new SimpleDateFormat("yyyy/MM/dd").format(cal.getTime());
-                String mail = user.getEmail();
-                String nameFavor = favor.getName();
-                String ptsReto = favor.getPts();
-                tr.pedirFavor(user.getUid(),fecha,favor.getId(),favor.getIdOwner(),mail,name,ptsReto,nameFavor,idEntregable);
                 tr.updateEstado(favor.getId(),"disponibilidad",1);
-
                 break;
             }
         }

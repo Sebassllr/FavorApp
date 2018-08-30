@@ -64,7 +64,7 @@ public class Transacciones {
 
     public Task<Void> updateFavor(String idFav, Favor favor){
         Log.e("ERR", idFav);
-        return databaseReference.child("Solicitudes").child(idFav).setValue(favor);
+        return databaseReference.child("Favores").child(idFav).setValue(favor);
     }
 
 

@@ -88,11 +88,8 @@ public class RAFavorProfileG extends RecyclerView.Adapter<RAFavorProfileG.ViewHo
             public void onClick(View view) {
                 favorProfile = mDataset.get(position);
                 isEdit = Boolean.TRUE;
-
                 pos = position;
-
                 showPopupMenu(holder.overflow, favor);
-
             }
         });
     }
