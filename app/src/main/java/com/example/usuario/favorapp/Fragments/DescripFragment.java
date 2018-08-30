@@ -76,6 +76,7 @@ public class DescripFragment extends Fragment implements View.OnClickListener {
                 pedirFavor();
                 changeF();
 =======
+                tr.updateEstado(favor.getId(),"disponibilidad",1);
 >>>>>>> 0ea0cb5cb6281b1b8df5f353a569e09687cecb24
                 break;
             }
