@@ -36,6 +36,7 @@ public class DescripFragment extends Fragment implements View.OnClickListener {
     private Button btnPayFav;
     private Favor favor;
     private String name;
+    private int points;
     private Calendar cal = Calendar.getInstance();
     private Transacciones tr = new Transacciones();
     private FirebaseDAO firebaseDAO;
@@ -90,6 +91,7 @@ public class DescripFragment extends Fragment implements View.OnClickListener {
                             Usuario object = snapshot.getValue(us.getClass());
                             if(object.getId().equals(user.getUid())){
                                 name = object.getNombre();
+                                points = Integer.parseInt(object.getPuntos());
                             }
 
                         }
@@ -107,8 +109,12 @@ public class DescripFragment extends Fragment implements View.OnClickListener {
         String mail = user.getEmail();
         String nameFavor = favor.getName();
         String ptsReto = favor.getPts();
-        tr.pedirFavor(user.getUid(),fecha,favor.getId(),favor.getIdOwner(),mail,name,ptsReto,nameFavor,idEntregable);
-        tr.updateEstado(favor.getId(),"disponibilidad",1);
+        if(Integer.parseInt(ptsReto) <= points) {
+            tr.pedirFavor(user.getUid(), fecha, favor.getId(), favor.getIdOwner(), mail, name, ptsReto, nameFavor, idEntregable);
+            tr.updateEstado(favor.getId(), "disponibilidad", 1);
+        }else{
+            Toast.makeText(view.getContext(), "Vaya! te has quedado sin puntos quizás deberias ayudar a alguien.", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void changeF(){
