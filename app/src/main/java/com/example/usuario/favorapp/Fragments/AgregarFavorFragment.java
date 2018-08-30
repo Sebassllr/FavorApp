@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,7 @@ import android.widget.Toast;
 
 import com.example.usuario.favorapp.Clases.Favor;
 import com.example.usuario.favorapp.Clases.Transacciones;
+import com.example.usuario.favorapp.NavigationActivity;
 import com.example.usuario.favorapp.R;
 import com.example.usuario.favorapp.Util.Util;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -90,10 +92,10 @@ public class AgregarFavorFragment extends Fragment implements View.OnClickListen
 
             tvNameFavor.setText(favor.getName());
             tvDescription.setText(favor.getDescripcion());
+            tvUrlImage.setText(!favor.getImage().equals("")?"Contiene una imagen":"Sin imagen");
             sp_dynamic.setSelection(Integer.parseInt(favor.getPts())/100);
 
-            favorCommit = null;
-            favorProfile = null;
+
         }
     }
 
@@ -104,11 +106,11 @@ public class AgregarFavorFragment extends Fragment implements View.OnClickListen
         switch (vista){
             case R.id.btnAddFavor: {
                 if(isEditing){
-                    //Acá va el método para editar, la variable "favor" contiene le favor actual,
-                    //que se está editando
-                    Toast.makeText(view.getContext(), "Estoy editando", Toast.LENGTH_SHORT).show();
+                    editarFavor();
+                    changeF();
                 }else{
                     createFavor();
+                    changeF();
                 }
                 break;
             }
@@ -130,7 +132,35 @@ public class AgregarFavorFragment extends Fragment implements View.OnClickListen
             String fecha = new SimpleDateFormat("yyyy/MM/dd").format(cal.getTime());
             String idEntregable = tr.databaseReference.push().getKey();
             String descripcion = Util.getTxt(tvDescription);
-            tr.registrarFavor(name,foto,puntos,fecha,descripcion,true,tr.firebaseAuth.getCurrentUser().getUid(),idEntregable);
+            tr.registrarFavor(name,foto,puntos,fecha,descripcion,0,tr.firebaseAuth.getCurrentUser().getUid(),idEntregable);
+            favorCommit = null;
+            favorProfile = null;
+        }
+    }
+
+    private void editarFavor(){
+        if(!Util.emptyCampMSG(tvNameFavor,"Ingrese Nombre") && !Util.emptyCampMSG(tvUrlImage,"Agregue una imagen") && !Util.emptyCampMSG(tvDescription,"Agregue una descripcion")){
+            String name = Util.getTxt(tvNameFavor);
+            Uri foto = descargarFoto;
+            String descripcion = Util.getTxt(tvDescription);
+            String points = points()+"";
+            if(favorCommit != null || favorProfile != null) {
+                Favor favor;
+                if (favorCommit != null) {
+                    favor = favorCommit;
+                } else {
+                    favor = favorProfile;
+                }
+                favor.setName(name);
+                if(foto != null){
+                    favor.setImage(foto+"");
+                }
+                favor.setDescripcion(descripcion);
+                favor.setPts(points);
+                tr.updateFavor(favor.getId(),favor);
+                favorCommit = null;
+                favorProfile = null;
+            }
         }
     }
 
@@ -148,6 +178,12 @@ public class AgregarFavorFragment extends Fragment implements View.OnClickListen
                 }
             });
         }
+    }
+
+    private void changeF(){
+        NavigationActivity activity = (NavigationActivity) view.getContext();
+        PerfilFragment pf = new PerfilFragment();
+        activity.getSupportFragmentManager().beginTransaction().replace(R.id.FrFragment, pf).addToBackStack(null).commit();
     }
 
     private int points(){

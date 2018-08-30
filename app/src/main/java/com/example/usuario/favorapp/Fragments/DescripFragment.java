@@ -16,6 +16,7 @@ import com.example.usuario.favorapp.Clases.Favor;
 import com.example.usuario.favorapp.Clases.FirebaseDAO;
 import com.example.usuario.favorapp.Clases.Transacciones;
 import com.example.usuario.favorapp.Clases.Usuario;
+import com.example.usuario.favorapp.NavigationActivity;
 import com.example.usuario.favorapp.R;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -71,14 +72,8 @@ public class DescripFragment extends Fragment implements View.OnClickListener {
         int vista = view.getId();
         switch (vista) {
             case R.id.btnPayFav: {
-                String idEntregable = tr.databaseReference.push().getKey();
-                FirebaseUser user = tr.firebaseAuth.getCurrentUser();
-                String fecha = new SimpleDateFormat("yyyy/MM/dd").format(cal.getTime());
-                String mail = user.getEmail();
-                String nameFavor = favor.getName();
-                String ptsReto = favor.getPts();
-                tr.pedirFavor(user.getUid(),fecha,favor.getId(),favor.getIdOwner(),mail,name,ptsReto,nameFavor,idEntregable);
-                tr.updateEstado(favor.getId(),"disponibilidad",false);
+                pedirFavor();
+                changeF();
                 break;
             }
         }
@@ -103,5 +98,21 @@ public class DescripFragment extends Fragment implements View.OnClickListener {
                     public void onCancelled(DatabaseError databaseError) {
                     }
                 });
+    }
+    private void pedirFavor(){
+        String idEntregable = tr.databaseReference.push().getKey();
+        FirebaseUser user = tr.firebaseAuth.getCurrentUser();
+        String fecha = new SimpleDateFormat("yyyy/MM/dd").format(cal.getTime());
+        String mail = user.getEmail();
+        String nameFavor = favor.getName();
+        String ptsReto = favor.getPts();
+        tr.pedirFavor(user.getUid(),fecha,favor.getId(),favor.getIdOwner(),mail,name,ptsReto,nameFavor,idEntregable);
+        tr.updateEstado(favor.getId(),"disponibilidad",1);
+    }
+
+    private void changeF(){
+        NavigationActivity activity = (NavigationActivity) view.getContext();
+        ListaFavoresFragment pf = new ListaFavoresFragment();
+        activity.getSupportFragmentManager().beginTransaction().replace(R.id.FrFragment, pf).addToBackStack(null).commit();
     }
 }

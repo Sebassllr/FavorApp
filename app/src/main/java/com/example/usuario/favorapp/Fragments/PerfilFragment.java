@@ -7,6 +7,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.usuario.favorapp.Clases.FirebaseDAO;
+import com.example.usuario.favorapp.Clases.Transacciones;
 import com.example.usuario.favorapp.Clases.Usuario;
 import com.example.usuario.favorapp.NavigationActivity;
 import com.example.usuario.favorapp.Clases.Favor;
@@ -40,7 +42,7 @@ public class PerfilFragment extends Fragment implements View.OnClickListener{
     private ArrayList<Favor> mDataTest = new ArrayList();
     private View view ;
     private Resources r;
-
+    private Transacciones tr = new Transacciones();
     private FirebaseDAO firebaseDAO;
     private TextView tvName;
     @Override
@@ -49,6 +51,7 @@ public class PerfilFragment extends Fragment implements View.OnClickListener{
 
         view = inflater.inflate(R.layout.fragment_perfil, container, false);
         // Inflate the layout for this fragment
+        tr.inicializatedFireBase(view.getContext());
         NavigationActivity.toolbar.setTitle("Perfil");
         initializer();
         return view;
@@ -80,7 +83,7 @@ public class PerfilFragment extends Fragment implements View.OnClickListener{
         mRecyclerDates.addItemDecoration(new GridSpacingItemDecoration(2, Util.dpToPx(10,r), true));
         mRecyclerDates.setItemAnimator(new DefaultItemAnimator());
 
-        mFavors = new RAFavorProfileG(view.getContext(),mDataTest);
+        mFavors = new RAFavorProfileG(view.getContext(),mDataTest,tr);
         mRecyclerDates.setAdapter(mFavors);
     }
 
@@ -94,7 +97,7 @@ public class PerfilFragment extends Fragment implements View.OnClickListener{
                         for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                             Favor object = snapshot.getValue(favor.getClass());
 
-                            if(object.getIdOwner().equals(user.getUid())){
+                            if(object.getIdOwner().equals(user.getUid()) && object.getDisponibilidad() != 2){
                                 mDataTest.add(object);
                             }
 

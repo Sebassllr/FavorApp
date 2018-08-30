@@ -69,7 +69,7 @@ public class FragmentNotificaciones extends Fragment {
         mRecyclerDates.addItemDecoration(new GridSpacingItemDecoration(1, Util.dpToPx(10,r), true));
         mRecyclerDates.setItemAnimator(new DefaultItemAnimator());
 
-        mNotificaciones = new RANotificaciones(view.getContext(),mDataSolicitudes);
+        mNotificaciones = new RANotificaciones(view.getContext(),mDataSolicitudes,firebaseDAO);
         mRecyclerDates.setAdapter(mNotificaciones);
 
     }
@@ -83,7 +83,7 @@ public class FragmentNotificaciones extends Fragment {
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                             Solicitud object = snapshot.getValue(solicitud.getClass());
-                            if(object.getIdOwner().equals(user.getUid())) {
+                            if(object.getIdOwner().equals(user.getUid()) && solicitud.getEstadoS() == 0) {
                                 mDataSolicitudes.add(object);
                             }
                         }

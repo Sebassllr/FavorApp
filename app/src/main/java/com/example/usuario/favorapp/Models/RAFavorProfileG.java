@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.usuario.favorapp.Clases.Favor;
+import com.example.usuario.favorapp.Clases.Transacciones;
 import com.example.usuario.favorapp.Fragments.AgregarFavorFragment;
 import com.example.usuario.favorapp.NavigationActivity;
 import com.example.usuario.favorapp.R;
@@ -31,6 +32,8 @@ public class RAFavorProfileG extends RecyclerView.Adapter<RAFavorProfileG.ViewHo
     public static Boolean isEdit;
 
     public static Favor favorProfile;
+    public static int pos;
+    private Transacciones tr = new Transacciones();
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -54,15 +57,16 @@ public class RAFavorProfileG extends RecyclerView.Adapter<RAFavorProfileG.ViewHo
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public RAFavorProfileG(Context context , ArrayList<Favor> myDataset) {
+    public RAFavorProfileG(Context context , ArrayList<Favor> myDataset, Transacciones tr) {
         this.mDataset = myDataset;
         this.mContext = context;
+        this.tr = tr;
     }
 
     // Create new views (invoked by the layout manager)
     @Override
-    public RAFavorProfileG.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        // create a new view
+    public RAFavorProfileG.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {        // create a new view
+
         View v = LayoutInflater.from(mContext).inflate(R.layout.rv_my_favors_card,parent,false);
         return new RAFavorProfileG.ViewHolder(v);
     }
@@ -82,6 +86,7 @@ public class RAFavorProfileG extends RecyclerView.Adapter<RAFavorProfileG.ViewHo
             public void onClick(View view) {
                 favorProfile = mDataset.get(position);
                 isEdit = Boolean.TRUE;
+                pos = position;
                 showPopupMenu(holder.overflow);
             }
         });
@@ -113,10 +118,11 @@ public class RAFavorProfileG extends RecyclerView.Adapter<RAFavorProfileG.ViewHo
                     NavigationActivity activity = (NavigationActivity) mContext;
                     AgregarFavorFragment fragmentVisualizarFavores = new AgregarFavorFragment();
                     activity.getSupportFragmentManager().beginTransaction().replace(R.id.FrFragment, fragmentVisualizarFavores).addToBackStack(null).commit();
-                    Toast.makeText(mContext, "Editar", Toast.LENGTH_SHORT).show();
                     return true;
                 case R.id.action_delete:
-                    Toast.makeText(mContext, "Eliminar", Toast.LENGTH_SHORT).show();
+                    tr.updateEstado(favorProfile.getId(),"disponibilidad",2);
+                    mDataset.remove(favorProfile);
+                    notifyDataSetChanged();
                     return true;
                 default:
             }

@@ -9,7 +9,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.usuario.favorapp.Clases.FirebaseDAO;
 import com.example.usuario.favorapp.Clases.Solicitud;
+import com.example.usuario.favorapp.Clases.Transacciones;
 import com.example.usuario.favorapp.R;
 
 import java.util.List;
@@ -18,7 +20,7 @@ public class RANotificaciones  extends RecyclerView.Adapter<RANotificaciones.Vie
 
     private List<Solicitud> mDataset;
     private Context mContext;
-
+    private FirebaseDAO fDao;
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
     // you provide access to all the views for a data item in a view holder
@@ -43,9 +45,10 @@ public class RANotificaciones  extends RecyclerView.Adapter<RANotificaciones.Vie
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public RANotificaciones(Context context , List<Solicitud> myDataset) {
+    public RANotificaciones(Context context , List<Solicitud> myDataset, FirebaseDAO fDao) {
         this.mDataset = myDataset;
         this.mContext = context;
+        this.fDao= fDao;
     }
 
 
@@ -63,6 +66,26 @@ public class RANotificaciones  extends RecyclerView.Adapter<RANotificaciones.Vie
         holder.tvFavorN.setText(solicitud.getNameFavor());
         holder.tvMail.setText(solicitud.getMailSolicitante());
         holder.tvPuntos.setText(solicitud.getPtsFavor());
+
+        holder.btnAprobar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                fDao.updateEstadoSolicitud(solicitud.getIdSolicitud(),"estadoS",1);
+                fDao.updateFavor(solicitud.getIdFavor(),"disponibilidad",2);
+                mDataset.remove(solicitud);
+                notifyDataSetChanged();
+            }
+        });
+
+        holder.btnNoAprobar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                fDao.updateEstadoSolicitud(solicitud.getIdSolicitud(),"estadoS",2);
+                fDao.updateFavor(solicitud.getIdFavor(),"disponibilidad",0);
+                mDataset.remove(solicitud);
+                notifyDataSetChanged();
+            }
+        });
 
     }
 
