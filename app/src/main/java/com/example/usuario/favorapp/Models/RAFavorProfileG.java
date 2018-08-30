@@ -32,13 +32,11 @@ public class RAFavorProfileG extends RecyclerView.Adapter<RAFavorProfileG.ViewHo
     public static Boolean isEdit;
 
     public static Favor favorProfile;
-<<<<<<< HEAD
+
     public static int pos;
     private Transacciones tr = new Transacciones();
 
-=======
-    private Transacciones tr = new Transacciones();
->>>>>>> 0ea0cb5cb6281b1b8df5f353a569e09687cecb24
+
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
     // you provide access to all the views for a data item in a view holder
@@ -90,12 +88,11 @@ public class RAFavorProfileG extends RecyclerView.Adapter<RAFavorProfileG.ViewHo
             public void onClick(View view) {
                 favorProfile = mDataset.get(position);
                 isEdit = Boolean.TRUE;
-<<<<<<< HEAD
+
                 pos = position;
-                showPopupMenu(holder.overflow);
-=======
+
                 showPopupMenu(holder.overflow, favor);
->>>>>>> 0ea0cb5cb6281b1b8df5f353a569e09687cecb24
+
             }
         });
     }
@@ -127,19 +124,14 @@ public class RAFavorProfileG extends RecyclerView.Adapter<RAFavorProfileG.ViewHo
                     NavigationActivity activity = (NavigationActivity) mContext;
                     AgregarFavorFragment fragmentVisualizarFavores = new AgregarFavorFragment();
                     activity.getSupportFragmentManager().beginTransaction().replace(R.id.FrFragment, fragmentVisualizarFavores).addToBackStack(null).commit();
-<<<<<<< HEAD
+
                     return true;
                 case R.id.action_delete:
                     tr.updateEstado(favorProfile.getId(),"disponibilidad",2);
                     mDataset.remove(favorProfile);
                     notifyDataSetChanged();
-=======
+                    return true;
 
-                    return true;
-                case R.id.action_delete:
-                    tr.updateEstado(f.getId(),"disponibilidad",2);
->>>>>>> 0ea0cb5cb6281b1b8df5f353a569e09687cecb24
-                    return true;
                 default:
             }
             return false;

@@ -133,7 +133,7 @@ public class AgregarFavorFragment extends Fragment implements View.OnClickListen
             String idEntregable = tr.databaseReference.push().getKey();
             String descripcion = Util.getTxt(tvDescription);
             tr.registrarFavor(name,foto,puntos,fecha,descripcion,0,tr.firebaseAuth.getCurrentUser().getUid(),idEntregable);
-<<<<<<< HEAD
+
             favorCommit = null;
             favorProfile = null;
         }
@@ -162,8 +162,7 @@ public class AgregarFavorFragment extends Fragment implements View.OnClickListen
                 favorCommit = null;
                 favorProfile = null;
             }
-=======
->>>>>>> 0ea0cb5cb6281b1b8df5f353a569e09687cecb24
+
         }
     }
 
