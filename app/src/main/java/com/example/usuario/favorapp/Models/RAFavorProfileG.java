@@ -37,6 +37,7 @@ public class RAFavorProfileG extends RecyclerView.Adapter<RAFavorProfileG.ViewHo
     private Transacciones tr = new Transacciones();
 
 =======
+    private Transacciones tr = new Transacciones();
 >>>>>>> 0ea0cb5cb6281b1b8df5f353a569e09687cecb24
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -101,10 +102,12 @@ public class RAFavorProfileG extends RecyclerView.Adapter<RAFavorProfileG.ViewHo
     /**
      * Showing popup menu when tapping on 3 dots
      */
+    private void showPopupMenu(View view, Favor favor) {
         // inflate menu
         PopupMenu popup = new PopupMenu(mContext, view);
         MenuInflater inflater = popup.getMenuInflater();
         inflater.inflate(R.menu.menu_favor, popup.getMenu());
+        popup.setOnMenuItemClickListener(new MyMenuItemClickListener(favor));
         popup.show();
     }
 
@@ -112,6 +115,9 @@ public class RAFavorProfileG extends RecyclerView.Adapter<RAFavorProfileG.ViewHo
      * Click listener for popup menu items
      */
     class MyMenuItemClickListener implements PopupMenu.OnMenuItemClickListener{
+        private Favor f;
+        public MyMenuItemClickListener(Favor favor) {
+            f = favor;
         }
 
         @Override
@@ -128,6 +134,10 @@ public class RAFavorProfileG extends RecyclerView.Adapter<RAFavorProfileG.ViewHo
                     mDataset.remove(favorProfile);
                     notifyDataSetChanged();
 =======
+
+                    return true;
+                case R.id.action_delete:
+                    tr.updateEstado(f.getId(),"disponibilidad",2);
 >>>>>>> 0ea0cb5cb6281b1b8df5f353a569e09687cecb24
                     return true;
                 default:

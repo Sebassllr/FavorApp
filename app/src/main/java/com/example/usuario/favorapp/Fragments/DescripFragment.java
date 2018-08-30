@@ -76,6 +76,13 @@ public class DescripFragment extends Fragment implements View.OnClickListener {
                 pedirFavor();
                 changeF();
 =======
+                String idEntregable = tr.databaseReference.push().getKey();
+                FirebaseUser user = tr.firebaseAuth.getCurrentUser();
+                String fecha = new SimpleDateFormat("yyyy/MM/dd").format(cal.getTime());
+                String mail = user.getEmail();
+                String nameFavor = favor.getName();
+                String ptsReto = favor.getPts();
+                tr.pedirFavor(user.getUid(),fecha,favor.getId(),favor.getIdOwner(),mail,name,ptsReto,nameFavor,idEntregable);
                 tr.updateEstado(favor.getId(),"disponibilidad",1);
 >>>>>>> 0ea0cb5cb6281b1b8df5f353a569e09687cecb24
                 break;
