@@ -75,7 +75,7 @@ public class DescripFragment extends Fragment implements View.OnClickListener {
             case R.id.btnPayFav: {
                 pedirFavor();
                 changeF();
-                tr.updateEstado(favor.getId(),"disponibilidad",1);
+
                 break;
             }
         }
@@ -112,6 +112,7 @@ public class DescripFragment extends Fragment implements View.OnClickListener {
         if(Integer.parseInt(ptsReto) <= points) {
             tr.pedirFavor(user.getUid(), fecha, favor.getId(), favor.getIdOwner(), mail, name, ptsReto, nameFavor, idEntregable);
             tr.updateEstado(favor.getId(), "disponibilidad", 1);
+
         }else{
             Toast.makeText(view.getContext(), "Vaya! te has quedado sin puntos quizás deberias ayudar a alguien.", Toast.LENGTH_SHORT).show();
         }
