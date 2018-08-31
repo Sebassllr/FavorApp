@@ -8,6 +8,7 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,7 +33,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FragmentNotificaciones extends Fragment {
+public class NotificacionesFragment extends Fragment {
 
     private View view;
     private RecyclerView mRecyclerDates;
@@ -83,7 +84,7 @@ public class FragmentNotificaciones extends Fragment {
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                             Solicitud object = snapshot.getValue(solicitud.getClass());
-                            if(object.getIdOwner().equals(user.getUid()) && solicitud.getEstadoS() == 0) {
+                            if(object.getIdOwner().equals(user.getUid()) && object.getEstadoS() == 0) {
                                 mDataSolicitudes.add(object);
                             }
                         }
@@ -95,4 +96,5 @@ public class FragmentNotificaciones extends Fragment {
                     }
                 });
     }
+
 }

@@ -91,7 +91,7 @@ public class DescripFragment extends Fragment implements View.OnClickListener {
                             Usuario object = snapshot.getValue(us.getClass());
                             if(object.getId().equals(user.getUid())){
                                 name = object.getNombre();
-                                points = Integer.parseInt(object.getPuntos());
+                                points =object.getPuntos();
                             }
 
                         }

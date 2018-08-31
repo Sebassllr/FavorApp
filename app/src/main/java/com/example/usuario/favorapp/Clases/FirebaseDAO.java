@@ -68,11 +68,15 @@ public class FirebaseDAO {
         return mStorage;
     }
 
-    public Task<Void> updateEstadoSolicitud(String idFav, String idNodo, int valor){
-        return databaseReference.child("Solicitudes").child(idFav).child(idNodo).setValue(valor);
+    public Task<Void> updateEstadoSolicitud(String idSolici, String idNodo, int valor){
+        return databaseReference.child("Solicitudes").child(idSolici).child(idNodo).setValue(valor);
     }
 
     public Task<Void> updateFavor(String idFav, String idNodo, int valor){
         return databaseReference.child("Favores").child(idFav).child(idNodo).setValue(valor);
+    }
+
+    public Task<Void> updatePuntos(String idUser, String idNodo, int valor){
+        return databaseReference.child("Users").child(idUser).child(idNodo).setValue(valor);
     }
 }

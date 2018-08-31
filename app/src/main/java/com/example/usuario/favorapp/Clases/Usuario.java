@@ -4,12 +4,12 @@ public class Usuario implements FirebaseItems{
 
     private String nombre;
     private String id;
-    private String puntos;
+    private int puntos;
     private String mail;
 
     public Usuario (){}
 
-    public Usuario(String nombre, String id, String puntos, String mail) {
+    public Usuario(String nombre, String id, int puntos, String mail) {
         this.nombre = nombre;
         this.id = id;
         this.puntos = puntos;
@@ -40,11 +40,11 @@ public class Usuario implements FirebaseItems{
         this.id = id;
     }
 
-    public String getPuntos() {
+    public int getPuntos() {
         return puntos;
     }
 
-    public void setPuntos(String puntos) {
+    public void setPuntos(int puntos) {
         this.puntos = puntos;
     }
 

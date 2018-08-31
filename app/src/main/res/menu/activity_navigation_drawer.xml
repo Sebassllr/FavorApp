@@ -18,6 +18,11 @@
             android:title="Notificaciones" />
 
         <item
+            android:id="@+id/nav_regalos_nf"
+            android:icon="@mipmap/ic_gift"
+            android:title="Mis Obsequios" />
+
+        <item
             android:id="@+id/nav_logout"
             android:icon="@mipmap/ic_shut_down"
             android:title="Cerrar Sesión" />

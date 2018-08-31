@@ -45,6 +45,23 @@
                 android:text="@string/name"
                 android:textColor="@color/black"
                 android:textSize="30sp" />
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="4"
+                android:text="@string/points"
+                android:textColor="@color/colorPrimaryDark" />
+            <TextView
+                android:id="@+id/tvPuntos"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="6"
+                android:text="@string/points"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
         </LinearLayout>
         <LinearLayout
             android:layout_marginTop="10dp"

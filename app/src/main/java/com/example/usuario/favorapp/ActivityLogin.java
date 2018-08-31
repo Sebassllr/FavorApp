@@ -143,6 +143,6 @@ public class ActivityLogin extends AppCompatActivity implements View.OnClickList
         String name = Util.getTxt(tvCompleteName);
         String mail = Util.getTxt(tvMail);
         String pass = Util.getTxt(tvPassword);
-        tr.registrarUser(mail,pass,this,name,"100");
+        tr.registrarUser(mail,pass,this,name,100);
     }
 }

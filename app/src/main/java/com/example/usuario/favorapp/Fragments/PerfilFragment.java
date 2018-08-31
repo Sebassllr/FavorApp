@@ -44,7 +44,7 @@ public class PerfilFragment extends Fragment implements View.OnClickListener{
     private Resources r;
     private Transacciones tr = new Transacciones();
     private FirebaseDAO firebaseDAO;
-    private TextView tvName;
+    private TextView tvName, tvPuntos;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -62,6 +62,7 @@ public class PerfilFragment extends Fragment implements View.OnClickListener{
      */
     private void initializer(){
         tvName = view.findViewById(R.id.tvName);
+        tvPuntos = view.findViewById(R.id.tvPuntos);
         btnAddFavor = view.findViewById(R.id.btnAddFavor);
         btnAddFavor.setOnClickListener(this);
         firebaseDAO = new FirebaseDAO();
@@ -121,6 +122,7 @@ public class PerfilFragment extends Fragment implements View.OnClickListener{
                             Usuario object = snapshot.getValue(us.getClass());
                             if(object.getId().equals(user.getUid())){
                                 tvName.setText(object.getNombre());
+                                tvPuntos.setText(object.getPuntos()+"");
                             }
 
                         }

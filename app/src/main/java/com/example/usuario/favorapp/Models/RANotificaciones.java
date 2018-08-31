@@ -12,8 +12,14 @@ import android.widget.TextView;
 import com.example.usuario.favorapp.Clases.FirebaseDAO;
 import com.example.usuario.favorapp.Clases.Solicitud;
 import com.example.usuario.favorapp.Clases.Transacciones;
+import com.example.usuario.favorapp.Clases.Usuario;
 import com.example.usuario.favorapp.R;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class RANotificaciones  extends RecyclerView.Adapter<RANotificaciones.ViewHo>  {
@@ -21,6 +27,8 @@ public class RANotificaciones  extends RecyclerView.Adapter<RANotificaciones.Vie
     private List<Solicitud> mDataset;
     private Context mContext;
     private FirebaseDAO fDao;
+    private static List<Usuario> mDataUsuarios = new ArrayList();
+
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
     // you provide access to all the views for a data item in a view holder
@@ -72,7 +80,7 @@ public class RANotificaciones  extends RecyclerView.Adapter<RANotificaciones.Vie
             public void onClick(View view) {
                 fDao.updateEstadoSolicitud(solicitud.getIdSolicitud(),"estadoS",1);
                 fDao.updateFavor(solicitud.getIdFavor(),"disponibilidad",2);
-                mDataset.remove(solicitud);
+                getNodes(new Usuario(),position);
                 notifyDataSetChanged();
             }
         });
@@ -83,12 +91,50 @@ public class RANotificaciones  extends RecyclerView.Adapter<RANotificaciones.Vie
                 fDao.updateEstadoSolicitud(solicitud.getIdSolicitud(),"estadoS",2);
                 fDao.updateFavor(solicitud.getIdFavor(),"disponibilidad",0);
                 mDataset.remove(solicitud);
-                notifyDataSetChanged();
+
             }
         });
 
     }
-
+    public void getNodes(final Usuario usuario, final int pos){
+        mDataUsuarios = new ArrayList<>();
+        fDao.getDatabaseReference().child(usuario.getFirebaseNodeName())
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        FirebaseUser user = fDao.getFirebaseUser();
+                        Solicitud solicitud = mDataset.get(pos);
+                        String owner = solicitud.getIdOwner();
+                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                            Usuario object = snapshot.getValue(usuario.getClass());
+                            if(mDataset.size()>0 ){
+                                if(object.getId().equals(mDataset.get(pos).getIdSolicitante()) ){
+                                    mDataUsuarios.add(object);
+                                }else if(object.getId().equals(user.getUid())){
+                                    mDataUsuarios.add(object);
+                                }
+                            }
+                        }
+                        if(mDataUsuarios.get(0).getId().equals(owner)){
+                            int puntosO =  mDataUsuarios.get(0).getPuntos()+Integer.parseInt(solicitud.getPtsFavor());
+                            int puntosS =  mDataUsuarios.get(1).getPuntos()-Integer.parseInt(solicitud.getPtsFavor());
+                            fDao.updatePuntos(solicitud.getIdSolicitante(),"puntos",puntosS);
+                            fDao.updatePuntos(solicitud.getIdOwner(), "puntos", puntosO);
+                            mDataset.remove(solicitud);
+                        }else{
+                            int puntosO =  mDataUsuarios.get(1).getPuntos()+Integer.parseInt(solicitud.getPtsFavor());
+                            int puntosS = mDataUsuarios.get(0).getPuntos()-Integer.parseInt(solicitud.getPtsFavor());
+                            fDao.updatePuntos(solicitud.getIdSolicitante(),"puntos",puntosS);
+                            fDao.updatePuntos(solicitud.getIdOwner(), "puntos", puntosO);
+                            mDataset.remove(solicitud);
+                        }
+                        notifyDataSetChanged();
+                    }
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                    }
+                });
+    }
     @Override
     public int getItemCount() {
         return mDataset.size();

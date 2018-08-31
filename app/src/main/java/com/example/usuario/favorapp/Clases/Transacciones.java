@@ -125,7 +125,7 @@ public class Transacciones {
         return databaseReference.child(usChildString);
     }
 
-    public void registrarUser(final String email, final String password, final Context context, final String name, final String puntos){
+    public void registrarUser(final String email, final String password, final Context context, final String name, final int puntos){
         progressDialog = new ProgressDialog(context);
         progressDialog.setMessage("Registrando usuario, por favor espera");
         progressDialog.show();
@@ -142,7 +142,7 @@ public class Transacciones {
         });
     }
 
-    private void ingresarNuevo(String email, String password, final Context context, final String name, final String puntos) {
+    private void ingresarNuevo(String email, String password, final Context context, final String name, final int puntos) {
         firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {

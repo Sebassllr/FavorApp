@@ -16,10 +16,10 @@ import android.view.MenuItem;
 import android.widget.FrameLayout;
 
 import com.example.usuario.favorapp.Clases.Transacciones;
-import com.example.usuario.favorapp.Fragments.FragmentNotificaciones;
+import com.example.usuario.favorapp.Fragments.NotificacionesFragment;
 import com.example.usuario.favorapp.Fragments.ListaFavoresFragment;
 import com.example.usuario.favorapp.Fragments.PerfilFragment;
-import com.google.firebase.auth.FirebaseAuth;
+import com.example.usuario.favorapp.Fragments.RegalosFragments;
 
 public class NavigationActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -110,7 +110,11 @@ public class NavigationActivity extends AppCompatActivity
                 break;
             }
            case R.id.nav_notifi:{
-               fragment = new FragmentNotificaciones();
+               fragment = new NotificacionesFragment();
+                break;
+            }
+            case R.id.nav_regalos_nf:{
+                fragment = new RegalosFragments();
                 break;
             }
             case R.id.nav_logout:{
