@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import com.example.usuario.favorapp.NavigationActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -56,15 +57,32 @@ public class Transacciones {
     }
 
 
-    public Task<Void> updateEstado(String idFav, String idNodo, boolean valor){
+    public Task<Void> updateEstado(String idFav, String idNodo, int valor){
         return databaseReference.child("Favores").child(idFav).child(idNodo).setValue(valor);
     }
 
 
-    public void registrarFavor(String name, String image, String pts, String fecha, String descripcion,boolean disponibilidad, String idOwner, final String key){
+    public Task<Void> updateFavor(String idFav, Favor favor){
+        Log.e("ERR", idFav);
+        return databaseReference.child("Favores").child(idFav).setValue(favor);
+    }
+
+
+
+    public void registrarFavor(String name, String image, String pts, String fecha, String descripcion, int disponibilidad, String idOwner, final String key){
         Favor favor = new Favor(key,name,image,pts,fecha,descripcion,disponibilidad,idOwner);
 
         insertar("Favores", key, favor).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+            }
+        });
+    }
+
+    public void pedirFavor( String idSolicitante, String fecha, String idFavor, String idOwner,String mailSolic,String nameSolic, String ptsReto,String nameReto,final String key){
+        //Solicitud solicitud = new Solicitud(key,idSolicitante,idFavor,idOwner,fecha,0);
+        Solicitud solicitud = new Solicitud(key, idSolicitante,idFavor, idOwner,mailSolic, nameSolic, ptsReto,nameReto, fecha ,0);
+        insertar("Solicitudes", key, solicitud).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
             }
@@ -147,6 +165,7 @@ public class Transacciones {
             }
         });
     }
+
 
 
 }

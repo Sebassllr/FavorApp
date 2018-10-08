@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import android.widget.FrameLayout;
 
 import com.example.usuario.favorapp.Clases.Transacciones;
+import com.example.usuario.favorapp.Fragments.FragmentNotificaciones;
 import com.example.usuario.favorapp.Fragments.ListaFavoresFragment;
 import com.example.usuario.favorapp.Fragments.PerfilFragment;
 import com.google.firebase.auth.FirebaseAuth;
@@ -23,12 +24,12 @@ import com.google.firebase.auth.FirebaseAuth;
 public class NavigationActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
         private Transacciones tr = new Transacciones();
-
+         public static Toolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navigation);
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -108,10 +109,10 @@ public class NavigationActivity extends AppCompatActivity
                 fragment = new ListaFavoresFragment();
                 break;
             }
-           /* case R.id.nav_manage:{
-
+           case R.id.nav_notifi:{
+               fragment = new FragmentNotificaciones();
                 break;
-            }*/
+            }
             case R.id.nav_logout:{
                 signout();
                 break;

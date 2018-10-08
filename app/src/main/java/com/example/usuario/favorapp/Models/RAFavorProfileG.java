@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.usuario.favorapp.Clases.Favor;
+import com.example.usuario.favorapp.Clases.Transacciones;
 import com.example.usuario.favorapp.Fragments.AgregarFavorFragment;
 import com.example.usuario.favorapp.NavigationActivity;
 import com.example.usuario.favorapp.R;
@@ -31,6 +32,10 @@ public class RAFavorProfileG extends RecyclerView.Adapter<RAFavorProfileG.ViewHo
     public static Boolean isEdit;
 
     public static Favor favorProfile;
+
+    public static int pos;
+    private Transacciones tr = new Transacciones();
+
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -54,15 +59,16 @@ public class RAFavorProfileG extends RecyclerView.Adapter<RAFavorProfileG.ViewHo
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public RAFavorProfileG(Context context , ArrayList<Favor> myDataset) {
+    public RAFavorProfileG(Context context , ArrayList<Favor> myDataset, Transacciones tr) {
         this.mDataset = myDataset;
         this.mContext = context;
+        this.tr = tr;
     }
 
     // Create new views (invoked by the layout manager)
     @Override
-    public RAFavorProfileG.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        // create a new view
+    public RAFavorProfileG.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {        // create a new view
+
         View v = LayoutInflater.from(mContext).inflate(R.layout.rv_my_favors_card,parent,false);
         return new RAFavorProfileG.ViewHolder(v);
     }
@@ -82,19 +88,20 @@ public class RAFavorProfileG extends RecyclerView.Adapter<RAFavorProfileG.ViewHo
             public void onClick(View view) {
                 favorProfile = mDataset.get(position);
                 isEdit = Boolean.TRUE;
-                showPopupMenu(holder.overflow);
+                pos = position;
+                showPopupMenu(holder.overflow, favor);
             }
         });
     }
     /**
      * Showing popup menu when tapping on 3 dots
      */
-    private void showPopupMenu(View view) {
+    private void showPopupMenu(View view, Favor favor) {
         // inflate menu
         PopupMenu popup = new PopupMenu(mContext, view);
         MenuInflater inflater = popup.getMenuInflater();
         inflater.inflate(R.menu.menu_favor, popup.getMenu());
-        popup.setOnMenuItemClickListener(new MyMenuItemClickListener());
+        popup.setOnMenuItemClickListener(new MyMenuItemClickListener(favor));
         popup.show();
     }
 
@@ -102,8 +109,9 @@ public class RAFavorProfileG extends RecyclerView.Adapter<RAFavorProfileG.ViewHo
      * Click listener for popup menu items
      */
     class MyMenuItemClickListener implements PopupMenu.OnMenuItemClickListener{
-
-        public MyMenuItemClickListener() {
+        private Favor f;
+        public MyMenuItemClickListener(Favor favor) {
+            f = favor;
         }
 
         @Override
@@ -113,11 +121,14 @@ public class RAFavorProfileG extends RecyclerView.Adapter<RAFavorProfileG.ViewHo
                     NavigationActivity activity = (NavigationActivity) mContext;
                     AgregarFavorFragment fragmentVisualizarFavores = new AgregarFavorFragment();
                     activity.getSupportFragmentManager().beginTransaction().replace(R.id.FrFragment, fragmentVisualizarFavores).addToBackStack(null).commit();
-                    Toast.makeText(mContext, "Editar", Toast.LENGTH_SHORT).show();
+
                     return true;
                 case R.id.action_delete:
-                    Toast.makeText(mContext, "Eliminar", Toast.LENGTH_SHORT).show();
+                    tr.updateEstado(favorProfile.getId(),"disponibilidad",2);
+                    mDataset.remove(favorProfile);
+                    notifyDataSetChanged();
                     return true;
+
                 default:
             }
             return false;

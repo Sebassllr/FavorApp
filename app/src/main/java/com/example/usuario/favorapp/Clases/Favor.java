@@ -19,14 +19,14 @@ public class Favor extends NodoFirebase implements FirebaseItems {
     private String fecha;
     private String descripcion;
     private String id;
-    private boolean disponibilidad;
+    private int disponibilidad;
     //////////////////
     //Constructor
     /////////////////
 
     public Favor(){}
 
-    public Favor(String id,String name, String image, String pts, String fecha,String descripcion, boolean disponibilidad, String idOwner) {
+    public Favor(String id, String name, String image, String pts, String fecha, String descripcion, int disponibilidad, String idOwner) {
         this.id = id;
         this.name = name;
         this.image = image;
@@ -83,11 +83,11 @@ public class Favor extends NodoFirebase implements FirebaseItems {
         this.descripcion = descripcion;
     }
 
-    public boolean isDisponibilidad() {
+    public int getDisponibilidad() {
         return disponibilidad;
     }
 
-    public void setDisponibilidad(boolean disponibilidad) {
+    public void setDisponibilidad(int disponibilidad) {
         this.disponibilidad = disponibilidad;
     }
 
@@ -106,6 +106,8 @@ public class Favor extends NodoFirebase implements FirebaseItems {
     public void setId(String id) {
         this.id = id;
     }
+
+
 
     @Override
     public String getFirebaseNodeName() {
